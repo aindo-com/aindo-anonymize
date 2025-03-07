@@ -104,6 +104,11 @@ plugins:
   - mike:
       alias_type: symlink
       canonical_version: latest
+  - exclude:
+      glob:
+        - requirements.txt
+        - hooks.py
+        - __pycache__/*
   - mkdocstrings:
       handlers:
         python:
