@@ -180,4 +180,4 @@ class Config:
         return cls(steps=steps)
 
     def __repr__(self) -> str:
-        return f"Config(steps={self.steps!r}"
+        return f"Config(steps={self.steps!r})"
