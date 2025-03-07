@@ -4,6 +4,7 @@
 
 mkdocs
 mkdocs-material
+mkdocs-exclude
 mkdocstrings-python
 mike
 ruff
