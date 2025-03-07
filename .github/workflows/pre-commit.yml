@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: Pre-commit checks
+
+on:
+  workflow_dispatch:
+    inputs:
+      python-version:
+        type: string
+        required: true
+        description: Python version
+        default: '3.10'
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+        required: false
+        default: '3.10'
+
+permissions:
+  contents: read
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Run pre-commit
+      run: |
+        pip install pre-commit
+        pre-commit run --all-files --show-diff-on-failure --color=always
+
+  # Pyright should be integrated into pre-commit, but due to issues with its (python) environment setup,  
+  # it is kept as a separate job for now.
+  type-checker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+
+    - name: Install requirements
+      run: |
+        python -m pip install --upgrade pip
+        pip install .[dev]
+
+    - name: Run pyright
+      run: pyright

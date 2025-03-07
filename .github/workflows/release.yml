@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: googleapis/release-please-action@v4
+      with:
+        token: ${{ secrets.PAT_TOKEN }}
+        release-type: python

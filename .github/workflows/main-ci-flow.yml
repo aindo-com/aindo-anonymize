@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: Main CI flow
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+    - main
+
+jobs:
+  pre-commit:
+    name: Run pre-commit checks
+    uses: ./.github/workflows/pre-commit.yml
+
+  tests:
+    name: Run tests for Python ${{ matrix.python-version }}
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12" ]
+      fail-fast: false
+    uses: ./.github/workflows/tests.yml
+    with:
+      python-version: ${{ matrix.python-version }}
+      skip-coverage: ${{ matrix.python-version != '3.10' }} # Run coverage analysis only once.
+
+  docs-publish:
+    name: Publish documentation for version 'dev'
+    needs: [pre-commit, tests]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/docs-update.yml

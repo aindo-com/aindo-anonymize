@@ -1,0 +1,132 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+site_name: Aindo Anonymize
+site_description: Lightweight Python library for anonymization
+site_url: https://docs.anonymize.aindo.com/
+strict: true
+remote_branch: docs-site
+
+nav:
+  - Welcome:
+    - Welcome: index.md
+  - Get started:
+    - Overview: get_started/overview.md
+    - Quick start: get_started/quickstart.md
+  - API reference: 
+    - Techniques: api_reference/techniques.md
+    - Pipeline: api_reference/pipeline.md
+    - Configuration: api_reference/config.md
+  - Developers:
+    - Contributing: developers/contributing.md
+    - Changelog: developers/changelog.md
+
+theme:
+  name: material
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - navigation.tabs
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.indexes
+    - navigation.tracking
+    - navigation.path
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/laptop
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: black
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: white
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+  logo: "https://www.aindo.com/favicon.svg"
+  favicon: "https://www.aindo.com/favicon.ico"
+
+repo_url: https://github.com/aindo-com/aindo-anonymize
+repo_name: aindo-com/aindo-anonymize
+
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/solid/globe 
+      link: https://www.aindo.com/
+      name: Website
+    - icon: fontawesome/brands/linkedin 
+      link: https://www.linkedin.com/company/aindo/
+      name: LinkedIn
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/aindo_ai
+      name: Twitter / X
+
+extra_css:
+  - "extra/code.css"
+  - "extra/colors.css"
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.blocks.tab:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path: ["./tests/anonymize/data/"]
+  - pymdownx.emoji
+
+watch:
+  - src
+
+hooks:
+  - "docs/hooks.py"
+
+plugins:
+  - search
+  - mike:
+      alias_type: symlink
+      canonical_version: latest
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            separate_signature: true
+            show_root_heading: true
+            show_root_full_path: false
+            heading_level: 3
+            merge_init_into_class: true
+            show_signature_annotations: true
+            show_bases: true
+            show_source: false
+            signature_crossrefs: true
+            filters: ["!^_"]
+            modernize_annotations: true
+          import:
+            - url: https://docs.python.org/3/objects.inv
+              domains: [py, std]           
+            - url: https://pandas.pydata.org/pandas-docs/stable/objects.inv
+              domains: [py, std]     
+            - url: https://numpy.org/doc/stable/objects.inv
+              domains: [py, std]
+            - url: https://faker.readthedocs.io/en/master/objects.inv
+              domains: [py, std]
+      enable_inventory: true

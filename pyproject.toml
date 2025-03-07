@@ -1,0 +1,96 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "aindo-anonymize"
+description = "A lightweight Python library for anonymizing tabular data."
+authors = [{ name = "Aindo SpA", email = "hello@aindo.com" }]
+license = { file = "LICENSES/MIT.txt" }
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.10, <3.13"
+dependencies = [
+  "numpy>=1.23",
+  "pandas>=2.1.1, <3",
+  "scikit-learn>=1.5, <2",
+  "faker>=17.0.0"
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Repository = "https://github.com/aindo-com/aindo-anonymize"
+Documentation = "https://docs.anonymize.aindo.com"
+
+[project.optional-dependencies]
+test = [
+  "pytest~=8.3.3",
+  "scipy~=1.14.1",
+  "coverage",
+]
+
+dev = [
+  "pre-commit",
+  "pyright",
+  "pandas-stubs",
+  # The following are also installed by pre-commit
+  # Note: ensure these versions match those specified in the pre-commit configuration.
+  "ruff==0.9.2",
+  "gitlint==0.19.1",
+  "reuse==5.0.2",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = { attr = "aindo.anonymize.version.__version__" }
+
+[tool.ruff]
+line-length = 120
+lint.pycodestyle.max-doc-length = 120
+lint.pycodestyle.max-line-length = 120
+lint.extend-select = ["TID252", "I"]
+lint.extend-safe-fixes = ["TID252"]
+lint.flake8-tidy-imports.ban-relative-imports = "all"
+
+[tool.pyright]
+include = ["src/*"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:pastebin -p no:nose -p no:doctest -p no:junitxml -p no:faker"
+
+[tool.coverage.run]
+source = ["src"]
+sigterm = true
+
+[tool.coverage.report]
+exclude_also = [
+  "raise NotImplementedError",
+  "if TYPE_CHECKING:",
+  "def __repr__",
+  "def __str__",
+  "@(abc\\.)?abstractmethod",
+]
+fail_under = 85
+show_missing = true
+skip_covered = true
+sort = "Miss"

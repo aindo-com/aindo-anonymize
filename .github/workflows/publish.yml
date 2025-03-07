@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: Publish release to PyPI and TestPyPI
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+
+jobs:
+  build:
+    name: Build distribution package
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+        cache: 'pip'
+
+    - name: Install 'build' library
+      run: |
+        python -m pip install --upgrade pip
+        pip install build
+
+    - name: Build library
+      run: python -m build
+
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+  publish-to-testpypi:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/aindo-anonymize
+    
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Download all the distributions
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+    - name: Publish package to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+
+  publish-to-pypi:
+    runs-on: ubuntu-latest
+    needs: [build, publish-to-testpypi]
+    
+    environment:
+      name: pypi
+      url: https://pypi.org/p/aindo-anonymize
+    
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Download all the distributions
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1

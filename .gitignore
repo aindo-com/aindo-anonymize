@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build
+dist
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# Unit test / coverage reports
+.pytest_cache/
+.coverage
+.coverage.*
+
+# Environments
+.env
+.venv
+venv/
+
+# Documentation files
+/docs/developers/changelog.md
+/site/
+/site.zip
+
+# PyCharm / VSCode
+.idea/
+.vscode/
+
+# Logs
+*.log
+*.log.*

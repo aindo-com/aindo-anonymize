@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+default_language_version:
+  python: python3
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: check-added-large-files
+  - id: check-merge-conflict
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+  - id: debug-statements
+- repo: https://github.com/jorisroovers/gitlint
+  rev: v0.19.1
+  hooks:
+  - id: gitlint
+    args: [--contrib=CT1, --msg-filename]
+  - id: gitlint-ci
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.9.2
+  hooks:
+    - id: ruff
+      args: [--fix]
+    - id: ruff-format
+- repo: https://github.com/fsfe/reuse-tool
+  rev: v5.0.2
+  hooks:
+    - id: reuse
+files: ^src|^tests

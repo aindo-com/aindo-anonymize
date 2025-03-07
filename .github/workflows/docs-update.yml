@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: Publish documentation
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+  workflow_call:
+
+jobs:
+  publish:
+    name: Publish library documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs-site
+        uses: actions/checkout@v4
+        with:
+          ref: docs-site
+
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+  
+      - name: Install requirements
+        run: pip install -r docs/requirements.txt
+        
+      - name: Set git credentials
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name:  Publish documentation for version 'dev'
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: mike deploy dev --push
+
+      - name: Publish documentation for version 'latest'
+        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          VERSION_MAJOR_MINOR=$(echo "${{ github.ref_name }}" | sed 's/^v//' | awk -F. '{print $1 "." $2}')
+          mike deploy "$VERSION_MAJOR_MINOR" latest --update-aliases --push

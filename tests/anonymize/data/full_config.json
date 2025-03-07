@@ -1,0 +1,89 @@
+{
+  "steps": [
+    {
+      "method": {
+        "type": "binning",
+        "bins": 10
+      },
+      "columns": ["column_a"]
+    },
+    {
+      "method": {
+        "type": "character_masking",
+        "mask_length": 3,
+        "symbol": "*",
+        "starting_direction": "left"
+      },
+      "columns": ["column_b"]
+    },
+    {
+      "method": {
+        "type": "data_nulling",
+        "constant_value": "BLANK"
+      },
+      "columns": ["column_c"]
+    },
+    {
+      "method": {
+        "type": "key_hashing",
+        "key": "my key",
+        "salt": "my salt",
+        "hash_name": "sha256"
+      },
+      "columns": ["column_d"]
+    },
+    {
+      "method": {
+        "type": "mocking",
+        "data_generator": "name"
+      },
+      "columns": ["column_e"]
+    },
+    {
+      "method": {
+        "type": "perturbation_categorical",
+        "alpha": 0.8,
+        "sampling_mode": "uniform",
+        "frequencies": [
+          {"A": 0.5},
+          {"B": 0.5}
+        ],
+        "seed": 42
+      },
+      "columns": ["column_f"]
+    },
+    {
+      "method": {
+        "type": "perturbation_numerical",
+        "alpha": 0.8,
+        "sampling_mode": "weighted",
+        "perturbation_range": [1, 10],
+        "seed": 42
+      },
+      "columns": ["column_g"]
+    },
+    {
+      "method": {
+        "type": "swapping",
+        "alpha": 0.8,
+        "seed": 42
+      },
+      "columns": ["column_h"]
+    },
+    {
+      "method": {
+        "type": "top_bottom_coding_categorical",
+        "q": 0.8,
+        "other_label": "OTHER"
+      },
+      "columns": ["column_i"]
+    },
+    {
+      "method": {
+        "type": "top_bottom_coding_numerical",
+        "q": 0.3
+      },
+      "columns": ["column_l"]
+    }
+  ]
+}

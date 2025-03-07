@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2025 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: Run tests with coverage
+
+on:
+  workflow_dispatch:
+    inputs:
+      python-version:
+        type: string
+        required: true
+        description: Python version
+        default: '3.10'
+      skip-coverage:
+        type: boolean
+        required: false
+        description: Skip coverage step
+        default: false
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+        required: false
+        default: '3.10'
+      skip-coverage:
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+
+    - name: Install requirements
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+
+    - name: Run tests (with coverage)
+      if: ${{ ! inputs.skip-coverage }}
+      run: |
+        coverage run -m pytest
+        coverage report
+
+    - name: Run tests (without coverage)
+      if: ${{ inputs.skip-coverage }}
+      run: pytest
