@@ -1,0 +1,62 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Aindo SpA
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+.terminal {
+  background: #300a24;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+pre.terminal-content {
+  display: inline-block;
+  line-height: 1.3 !important;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #300a24 !important;
+  color: #d0d0d0 !important;
+}
+
+.ansi2 {
+  font-weight: lighter;
+}
+.ansi3 {
+  font-style: italic;
+}
+.ansi32 {
+  color: #00aa00;
+}
+.ansi34 {
+  color: #5656fe;
+}
+.ansi35 {
+  color: #E850A8;
+}
+.ansi38-1 {
+  color: #cf0000;
+}
+.ansi38-5 {
+  color: #E850A8;
+}
+.ansi38-68 {
+  color: #2a54a8;
+}
+
+
+/* Fancier color for operators such as * and |. */
+.doc-signature .o {
+  color: var(--md-code-hl-special-color);
+}
+
+/* Fancier color for constants such as None, True, and False. */
+.doc-signature .kc {
+  color: var(--md-code-hl-constant-color);
+}
+
+/* Fancier color for built-in types (only useful when cross-references are used). */
+.doc-signature .n > a[href^="https://docs.python.org/"][href*="/functions.html#"],
+.doc-signature .n > a[href^="https://docs.python.org/"][href*="/stdtypes.html#"] {
+  color: var(--md-code-hl-constant-color);
+}
