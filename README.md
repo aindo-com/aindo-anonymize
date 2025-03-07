@@ -8,7 +8,7 @@ SPDX-License-Identifier: MIT
 
 [![PyPI release](https://img.shields.io/pypi/v/aindo-anonymize.svg)](https://pypi.python.org/pypi/aindo-anonymize)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/aindo-anonymize.svg)](https://github.com/aindo-com/aindo-anonymize)
-[![license](https://img.shields.io/github/license/aindo-com/aindo-anonymize.svg)](https://github.com/aindo-com/aindo-anonymize/blob/main/LICENSES/MIT.txt)
+[![PyPI - License](https://img.shields.io/pypi/l/aindo-anonymize)](https://github.com/aindo-com/aindo-anonymize/blob/main/LICENSES/MIT.txt)
 
 **Aindo Anonymize** is a lightweight Python library that provides various techniques
 for anonymizing tabular data.
