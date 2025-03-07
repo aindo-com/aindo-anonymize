@@ -174,7 +174,7 @@ class Config:
             An instance of the class populated with the data from the dictionary.
         """
         steps_data = value.get("steps")
-        if not steps_data:
+        if steps_data is None:
             raise ValueError("Invalid input: 'steps' not found")
         steps = [TechniqueItem.from_dict(item_data) for item_data in steps_data]
         return cls(steps=steps)
