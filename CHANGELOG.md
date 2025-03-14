@@ -6,6 +6,13 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.0.2](https://github.com/aindo-com/aindo-anonymize/compare/v1.0.1...v1.0.2) (2025-03-14)
+
+
+### Documentation
+
+* change fonts ([68b47c9](https://github.com/aindo-com/aindo-anonymize/commit/68b47c9eb48ad48f773136a1b868ddd20d782f57))
+
 ## [1.0.1](https://github.com/aindo-com/aindo-anonymize/compare/v1.0.0...v1.0.1) (2025-03-07)
 
 
