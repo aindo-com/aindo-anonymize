@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="https://www.aindo.com/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.8">
     
     
       
@@ -42,15 +42,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../extra/fonts.css">
     
       <link rel="stylesheet" href="../../extra/code.css">
     
@@ -1272,7 +1268,7 @@ SPDX-License-Identifier: MIT
 -->
 
 <p><code>aindo-anonymize</code> techniques are classes that derive from
-<a class="autorefs autorefs-internal" href="#aindo.anonymize.techniques.base.BaseTechnique"><code>BaseTechnique</code></a>
+<a class="autorefs autorefs-internal" title="BaseTechnique" href="#aindo.anonymize.techniques.base.BaseTechnique"><code>BaseTechnique</code></a>
 and define specific parameters and logic for anonymization.</p>
 
 
@@ -1293,6 +1289,7 @@ and define specific parameters and logic for anonymization.</p>
 
 
         <p>Abstract base class for all anonymization techniques.</p>
+
 
 
 
@@ -1385,6 +1382,7 @@ and define specific parameters and logic for anonymization.</p>
       </tbody>
     </table>
 
+
     </div>
 
 </div>
@@ -1397,7 +1395,7 @@ and define specific parameters and logic for anonymization.</p>
 
 </div><p>Single-column techniques are anonymization methods designed to operate on individual data columns.
 These techniques are implemented as classes that derive from
-<a class="autorefs autorefs-internal" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique"><code>BaseSingleColumnTechnique</code></a>.</p>
+<a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique"><code>BaseSingleColumnTechnique</code></a>.</p>
 
 
 <div class="doc doc-object doc-class">
@@ -1413,12 +1411,13 @@ These techniques are implemented as classes that derive from
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseTechnique" href="#aindo.anonymize.techniques.base.BaseTechnique">BaseTechnique</a></code>, <code><a class="autorefs autorefs-external" title="abc.ABC" href="https://docs.python.org/3/library/abc.html#abc.ABC">ABC</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseTechnique (aindo.anonymize.techniques.base.BaseTechnique)" href="#aindo.anonymize.techniques.base.BaseTechnique">BaseTechnique</a></code>, <code><a class="autorefs autorefs-external" title="abc.ABC" href="https://docs.python.org/3/library/abc.html#abc.ABC">ABC</a></code></p>
 
 
         <p>Abstract base class for anonymization techniques applied to a single column.</p>
 <p>Subclasses should implement the <code>anonymize_column</code> method,
 which defines the logic for anonymizing a single column.</p>
+
 
 
 
@@ -1507,6 +1506,7 @@ which defines the logic for anonymizing a single column.</p>
       </tbody>
     </table>
 
+
     </div>
 
 </div>
@@ -1582,6 +1582,7 @@ It is a convenience method shared across all types of anonymizers.</p>
       </tbody>
     </table>
 
+
     </div>
 
 </div>
@@ -1609,7 +1610,7 @@ It is a convenience method shared across all types of anonymizers.</p>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
 
 
         <p>Implements data nulling.</p>
@@ -1649,6 +1650,7 @@ It is a convenience method shared across all types of anonymizers.</p>
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -1679,13 +1681,18 @@ It is a convenience method shared across all types of anonymizers.</p>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">CharacterMasking</span><span class="p">(</span>
     <span class="n">mask_length</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">symbol</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.AnyStr" href="https://docs.python.org/3/library/typing.html#typing.AnyStr">AnyStr</a></span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-    <span class="n">starting_direction</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.char_masking.StartingDirection" href="#aindo.anonymize.techniques.char_masking.StartingDirection">StartingDirection</a></span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">starting_direction</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="StartingDirection
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.char_masking.StartingDirection)" href="#aindo.anonymize.techniques.char_masking.StartingDirection">StartingDirection</a></span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code>, <code><a class="autorefs autorefs-external" title="typing.Generic" href="https://docs.python.org/3/library/typing.html#typing.Generic">Generic</a>[<a class="autorefs autorefs-external" title="typing.AnyStr" href="https://docs.python.org/3/library/typing.html#typing.AnyStr">AnyStr</a>]</code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code>, <code><a class="autorefs autorefs-external" title="typing.Generic" href="https://docs.python.org/3/library/typing.html#typing.Generic">Generic</a>[<a class="autorefs autorefs-external" title="typing.AnyStr" href="https://docs.python.org/3/library/typing.html#typing.AnyStr">AnyStr</a>]</code></p>
 
 
         <p>Implements character masking.</p>
@@ -1707,7 +1714,12 @@ Full masking is achieved by setting <code>mask_length=-1</code>.</p>
           <tr class="doc-section-item">
             <td><code><span title="aindo.anonymize.techniques.char_masking.CharacterMasking.starting_direction">starting_direction</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.char_masking.StartingDirection" href="#aindo.anonymize.techniques.char_masking.StartingDirection">StartingDirection</a></code>
+                  <code><a class="autorefs autorefs-internal" title="StartingDirection
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.char_masking.StartingDirection)" href="#aindo.anonymize.techniques.char_masking.StartingDirection">StartingDirection</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1750,6 +1762,7 @@ Defaults to 1.</p>
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -1778,7 +1791,12 @@ Defaults to 1.</p>
 
 </h3>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">Mocking</span><span class="p">(</span>
-    <span class="n">data_generator</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.mocking.MockingGeneratorMethods" href="#aindo.anonymize.techniques.mocking.MockingGeneratorMethods">MockingGeneratorMethods</a></span><span class="p">,</span>
+    <span class="n">data_generator</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="MockingGeneratorMethods
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.mocking.MockingGeneratorMethods)" href="#aindo.anonymize.techniques.mocking.MockingGeneratorMethods">MockingGeneratorMethods</a></span><span class="p">,</span>
     <span class="n">seed</span><span class="p">:</span> <span class="n"><span title="faker.typing.SeedType">SeedType</span></span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">faker_kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/reference/expressions.html#dict">dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">faker_generator_kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/reference/expressions.html#dict">dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1787,7 +1805,7 @@ Defaults to 1.</p>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
 
 
         <p>Implements mocking.</p>
@@ -1808,7 +1826,12 @@ It leverages the <code>faker</code> library to produce customizable, locale-awar
           <tr class="doc-section-item">
             <td><code><span title="aindo.anonymize.techniques.mocking.Mocking.data_generator">data_generator</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.mocking.MockingGeneratorMethods" href="#aindo.anonymize.techniques.mocking.MockingGeneratorMethods">MockingGeneratorMethods</a></code>
+                  <code><a class="autorefs autorefs-internal" title="MockingGeneratorMethods
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.mocking.MockingGeneratorMethods)" href="#aindo.anonymize.techniques.mocking.MockingGeneratorMethods">MockingGeneratorMethods</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1848,7 +1871,12 @@ It leverages the <code>faker</code> library to produce customizable, locale-awar
                 <code>data_generator</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.mocking.MockingGeneratorMethods" href="#aindo.anonymize.techniques.mocking.MockingGeneratorMethods">MockingGeneratorMethods</a></code>
+                  <code><a class="autorefs autorefs-internal" title="MockingGeneratorMethods
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.mocking.MockingGeneratorMethods)" href="#aindo.anonymize.techniques.mocking.MockingGeneratorMethods">MockingGeneratorMethods</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1902,6 +1930,7 @@ It leverages the <code>faker</code> library to produce customizable, locale-awar
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -1938,7 +1967,7 @@ It leverages the <code>faker</code> library to produce customizable, locale-awar
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
 
 
         <p>Implements key-based hashing.</p>
@@ -2001,6 +2030,7 @@ The de-identified values have always a uniform length.</p>
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -2028,12 +2058,17 @@ The de-identified values have always a uniform length.</p>
 
 
 </h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">Swapping</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.common.SeedT" href="#aindo.anonymize.techniques.common.SeedT">SeedT</a></span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">Swapping</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="SeedT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.common.SeedT)" href="#aindo.anonymize.techniques.common.SeedT">SeedT</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code>, <code><span title="aindo.anonymize.techniques.common.Seeder">Seeder</span></code>, <code><span title="aindo.anonymize.techniques.common.AlphaProbability">AlphaProbability</span></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code>, <code><span title="aindo.anonymize.techniques.common.Seeder">Seeder</span></code>, <code><span title="aindo.anonymize.techniques.common.AlphaProbability">AlphaProbability</span></code></p>
 
 
         <p>Implements swapping.</p>
@@ -2075,6 +2110,7 @@ representing the probability of a row being swapped with another.</p>
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -2107,7 +2143,7 @@ representing the probability of a row being swapped with another.</p>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
 
 
         <p>Implements binning for numerical columns.</p>
@@ -2162,6 +2198,7 @@ allowing for data generalization by replacing individual values with their corre
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -2191,16 +2228,41 @@ allowing for data generalization by replacing individual values with their corre
 </h3>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">PerturbationNumerical</span><span class="p">(</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">,</span>
-    <span class="n">sampling_mode</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.SamplingMode" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></span> <span class="o">=</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
-    <span class="n">perturbation_range</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.NumericsT" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.NumericsT" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a></span><span class="p">]</span>
+    <span class="n">sampling_mode</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="SamplingMode
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.SamplingMode)" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></span> <span class="o">=</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+    <span class="n">perturbation_range</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="NumericsT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.NumericsT)" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="NumericsT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.NumericsT)" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a></span><span class="p">]</span>
     <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.common.SeedT" href="#aindo.anonymize.techniques.common.SeedT">SeedT</a></span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="SeedT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.common.SeedT)" href="#aindo.anonymize.techniques.common.SeedT">SeedT</a></span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><span title="aindo.anonymize.techniques.perturbation.BasePerturbation">BasePerturbation</span></code>, <code><a class="autorefs autorefs-external" title="typing.Generic" href="https://docs.python.org/3/library/typing.html#typing.Generic">Generic</a>[<a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.NumericsT" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a>]</code></p>
+              Bases: <code><span title="aindo.anonymize.techniques.perturbation.BasePerturbation">BasePerturbation</span></code>, <code><a class="autorefs autorefs-external" title="typing.Generic" href="https://docs.python.org/3/library/typing.html#typing.Generic">Generic</a>[<a class="autorefs autorefs-internal" title="NumericsT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.NumericsT)" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a>]</code></p>
 
 
         <p>Implements perturbation for numerical columns.</p>
@@ -2235,7 +2297,12 @@ It supports two modes of replacement: uniform sampling and distribution-preservi
           <tr class="doc-section-item">
             <td><code><span title="aindo.anonymize.techniques.perturbation.PerturbationNumerical.sampling_mode">sampling_mode</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.SamplingMode" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></code>
+                  <code><a class="autorefs autorefs-internal" title="SamplingMode
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.SamplingMode)" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2248,7 +2315,17 @@ It supports two modes of replacement: uniform sampling and distribution-preservi
           <tr class="doc-section-item">
             <td><code><span title="aindo.anonymize.techniques.perturbation.PerturbationNumerical.perturbation_range">perturbation_range</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a>[<a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.NumericsT" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a>, <a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.NumericsT" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a>] | None</code>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a>[<a class="autorefs autorefs-internal" title="NumericsT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.NumericsT)" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a>, <a class="autorefs autorefs-internal" title="NumericsT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.NumericsT)" href="#aindo.anonymize.techniques.perturbation.NumericsT">NumericsT</a>] | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2259,6 +2336,7 @@ If not set, the range is automatically computed as the minimum and maximum of th
           </tr>
       </tbody>
     </table>
+
 
 
 
@@ -2297,9 +2375,19 @@ If not set, the range is automatically computed as the minimum and maximum of th
 </h3>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">PerturbationCategorical</span><span class="p">(</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">,</span>
-    <span class="n">sampling_mode</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.SamplingMode" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></span> <span class="o">=</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+    <span class="n">sampling_mode</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="SamplingMode
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.SamplingMode)" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></span> <span class="o">=</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
     <span class="n">frequencies</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/reference/expressions.html#dict">dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.common.SeedT" href="#aindo.anonymize.techniques.common.SeedT">SeedT</a></span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="SeedT
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.common.SeedT)" href="#aindo.anonymize.techniques.common.SeedT">SeedT</a></span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2340,7 +2428,12 @@ It supports two modes of replacement: uniform sampling and distribution-preservi
           <tr class="doc-section-item">
             <td><code><span title="aindo.anonymize.techniques.perturbation.PerturbationCategorical.sampling_mode">sampling_mode</span></code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.perturbation.SamplingMode" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></code>
+                  <code><a class="autorefs autorefs-internal" title="SamplingMode
+
+
+  
+      module-attribute
+   (aindo.anonymize.techniques.perturbation.SamplingMode)" href="#aindo.anonymize.techniques.perturbation.SamplingMode">SamplingMode</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2364,6 +2457,7 @@ Automatically computed if not provided.</p>
           </tr>
       </tbody>
     </table>
+
 
 
 
@@ -2409,7 +2503,7 @@ Automatically computed if not provided.</p>
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
 
 
         <p>Implements top/bottom coding for numerical columns.</p>
@@ -2474,6 +2568,7 @@ but not both. If <code>lower_value</code> and <code>upper_value</code> are used,
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -2510,7 +2605,7 @@ but not both. If <code>lower_value</code> and <code>upper_value</code> are used,
 
     <div class="doc doc-contents first">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="aindo.anonymize.techniques.base.BaseSingleColumnTechnique" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseSingleColumnTechnique (aindo.anonymize.techniques.base.BaseSingleColumnTechnique)" href="#aindo.anonymize.techniques.base.BaseSingleColumnTechnique">BaseSingleColumnTechnique</a></code></p>
 
 
         <p>Implements top/bottom coding for categorical columns.</p>
@@ -2574,6 +2669,7 @@ which categories should be replaced with <code>other_label</code>.</p>
 
 
 
+
   <div class="doc doc-children">
 
 
@@ -2610,6 +2706,7 @@ which categories should be replaced with <code>other_label</code>.</p>
 </code></pre></div>
 
     <div class="doc doc-contents first">
+
     </div>
 
 </div>
@@ -2631,6 +2728,7 @@ which categories should be replaced with <code>other_label</code>.</p>
 </code></pre></div>
 
     <div class="doc doc-contents first">
+
     </div>
 
 </div>
@@ -2652,6 +2750,7 @@ which categories should be replaced with <code>other_label</code>.</p>
 </code></pre></div>
 
     <div class="doc doc-contents first">
+
     </div>
 
 </div>
@@ -2673,6 +2772,7 @@ which categories should be replaced with <code>other_label</code>.</p>
 </code></pre></div>
 
     <div class="doc doc-contents first">
+
     </div>
 
 </div>
@@ -2954,6 +3054,7 @@ which categories should be replaced with <code>other_label</code>.</p>
 </code></pre></div>
 
     <div class="doc doc-contents first">
+
     </div>
 
 </div>

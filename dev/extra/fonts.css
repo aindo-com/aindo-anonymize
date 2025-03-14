@@ -1,0 +1,37 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Aindo SpA
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+@font-face {
+    font-family: 'hoves';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://www.aindo.com/fonts/hoves-4.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'hoves';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('https://www.aindo.com/fonts/hoves-6.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'silka';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('https://www.aindo.com/fonts/silka-5.woff2') format('woff2');
+}
+
+:root {
+  --md-text-font: hoves, sans-serif;
+}
+
+:root {
+  --md-code-font: silka, monospace;
+}

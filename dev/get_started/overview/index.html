@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="https://www.aindo.com/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.8">
     
     
       
@@ -42,15 +42,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../extra/fonts.css">
     
       <link rel="stylesheet" href="../../extra/code.css">
     
@@ -794,35 +790,35 @@ or <code>pandas.Series</code> — based on the method used.</p>
 <p>It currently implements the following anonymization techniques:</p>
 <ul>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.data_nulling.DataNulling"><strong>Data nulling</strong></a>:
+<p><a class="autorefs autorefs-internal" title="DataNulling" href="../../api_reference/techniques/#aindo.anonymize.techniques.data_nulling.DataNulling"><strong>Data nulling</strong></a>:
 Replaces the original data with <code>None</code> or a custom constant value.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.char_masking.CharacterMasking"><strong>Character masking</strong></a>:
+<p><a class="autorefs autorefs-internal" title="CharacterMasking" href="../../api_reference/techniques/#aindo.anonymize.techniques.char_masking.CharacterMasking"><strong>Character masking</strong></a>:
 Replaces some or all characters with a constant symbol.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.mocking.Mocking"><strong>Mocking</strong></a>:
+<p><a class="autorefs autorefs-internal" title="Mocking" href="../../api_reference/techniques/#aindo.anonymize.techniques.mocking.Mocking"><strong>Mocking</strong></a>:
 Generates realistic mock data for various fields, such as names, emails, and more.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.hashing.KeyHashing"><strong>KeyHashing</strong></a>:
+<p><a class="autorefs autorefs-internal" title="KeyHashing" href="../../api_reference/techniques/#aindo.anonymize.techniques.hashing.KeyHashing"><strong>KeyHashing</strong></a>:
 Data values are hashed using a cryptographic key and then encoded using Base64.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.swapping.Swapping"><strong>Swapping</strong></a>:
+<p><a class="autorefs autorefs-internal" title="Swapping" href="../../api_reference/techniques/#aindo.anonymize.techniques.swapping.Swapping"><strong>Swapping</strong></a>:
 Rearranges data by swapping values.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.binning.Binning"><strong>Binning</strong></a>:
+<p><a class="autorefs autorefs-internal" title="Binning" href="../../api_reference/techniques/#aindo.anonymize.techniques.binning.Binning"><strong>Binning</strong></a>:
 Groups numerical values into discrete bins and replaces individual values with their corresponding bin ranges.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.top_bottom_coding.TopBottomCodingNumerical"><strong>Top/Bottom coding</strong></a>:
+<p><a class="autorefs autorefs-internal" title="TopBottomCodingNumerical" href="../../api_reference/techniques/#aindo.anonymize.techniques.top_bottom_coding.TopBottomCodingNumerical"><strong>Top/Bottom coding</strong></a>:
 Replaces values above or below certain thresholds with a capped value.</p>
 </li>
 <li>
-<p><a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.perturbation.PerturbationNumerical"><strong>Perturbation</strong></a>:
+<p><a class="autorefs autorefs-internal" title="PerturbationNumerical" href="../../api_reference/techniques/#aindo.anonymize.techniques.perturbation.PerturbationNumerical"><strong>Perturbation</strong></a>:
 Slightly modifies the values according to the specified perturbation intensity and replacement strategy.</p>
 </li>
 </ul>
@@ -831,7 +827,7 @@ catering to different use cases and development preferences:</p>
 <ul>
 <li>
 <p><em>Explicit approach</em>: this method involves directly instantiating anonymization techniques
-using the library's Python classes (e.g., <a class="autorefs autorefs-internal" href="../../api_reference/techniques/#aindo.anonymize.techniques.binning.Binning"><code>Binning</code></a> for data binning).<br />
+using the library's Python classes (e.g., <a class="autorefs autorefs-internal" title="Binning" href="../../api_reference/techniques/#aindo.anonymize.techniques.binning.Binning"><code>Binning</code></a> for data binning).<br />
 It is particularly effective for scenarios where:
 (1) a limited number of techniques need to be applied,
 (2) the anonymization methods are predefined and can be hardcoded,
@@ -843,7 +839,12 @@ See a simple example <a href="../quickstart/#explicit-approach">here</a>.</p>
 <p><em>Declarative approach</em>: this approach allows users to define multiple anonymization techniques
 within a single configuration, which is then executed sequentially on the input data.
 The configuration can be instantiated from a Python dictionary
-using the <a class="autorefs autorefs-internal" href="../../api_reference/config/#aindo.anonymize.config.Config.from_dict"><code>Config.from_dict</code></a> method
+using the <a class="autorefs autorefs-internal" title="from_dict
+
+
+  
+      classmethod
+  " href="../../api_reference/config/#aindo.anonymize.config.Config.from_dict"><code>Config.from_dict</code></a> method
 and can be read from files in YAML, TOML or JSON formats.<br />
 This method is particularly advantageous when the anonymization workflow is dynamic and requires flexibility.<br />
 See a simple example <a href="../quickstart/#declarative-approach">here</a>.</p>
