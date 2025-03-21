@@ -7,7 +7,7 @@ SPDX-License-Identifier: MIT
 # Quick start
 
 In the following examples, we will demonstrate how to anonymize specific columns of the [UCI Adult dataset](https://archive.ics.uci.edu/dataset/2/adult)
-using either the *Explicit* or the *Declarative* approaches.
+using the *Explicit* and the *Declarative* approaches.
 
 The first step is to load the CSV file into a `pandas.DataFrame`:
 ```python {title="Load UCI Adult dataset"}
