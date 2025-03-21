@@ -29,7 +29,7 @@ Data values are hashed using a cryptographic key and then encoded using Base64.
 Rearranges data by swapping values.
 
 - [**Binning**][aindo.anonymize.techniques.binning.Binning]:
-Groups numerical values into discrete bins and replaces individual values with their corresponding bin ranges.
+Groups numerical values into discrete ranges (bins), replacing each value with the corresponding range.
 
 - [**Top/Bottom coding**][aindo.anonymize.techniques.top_bottom_coding.TopBottomCodingNumerical]:
 Replaces values above or below certain thresholds with a capped value.
@@ -38,7 +38,7 @@ Replaces values above or below certain thresholds with a capped value.
 Slightly modifies the values according to the specified perturbation intensity and replacement strategy.
 
 The library provides two usage approaches,
-catering to different use cases and development preferences:
+supporting different use cases and development preferences:
 
 - *Explicit approach*: this method involves directly instantiating anonymization techniques
 using the library's Python classes (e.g., [`Binning`][aindo.anonymize.techniques.binning.Binning] for data binning).  
