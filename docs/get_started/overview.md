@@ -13,6 +13,9 @@ or `pandas.Series` — based on the method used.
 
 It currently implements the following anonymization techniques:
 
+- [**Identity**][aindo.anonymize.techniques.identity.Identity]:
+leaves the original data untouched, useful in a declarative approach (see below).
+
 - [**Data nulling**][aindo.anonymize.techniques.data_nulling.DataNulling]:
 Replaces the original data with `None` or a custom constant value.
 

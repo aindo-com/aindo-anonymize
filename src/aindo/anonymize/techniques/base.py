@@ -11,7 +11,7 @@ import pandas as pd
 class BaseTechnique(ABC):
     """Abstract base class for all anonymization techniques."""
 
-    preserve_type: ClassVar[bool]
+    preserve_type: ClassVar[bool] = True
 
     @abstractmethod
     def anonymize(self, dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -36,8 +36,6 @@ class BaseSingleColumnTechnique(BaseTechnique, ABC):
     Subclasses should implement the `anonymize_column` method,
     which defines the logic for anonymizing a single column.
     """
-
-    preserve_type: ClassVar[bool] = True
 
     @abstractmethod
     def _apply_to_col(self, col: pd.Series) -> pd.Series:

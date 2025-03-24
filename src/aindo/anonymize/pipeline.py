@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: MIT
 
+import itertools
+from typing import cast
+
 import pandas as pd
 
 from aindo.anonymize.config import BaseSpec, Config
@@ -12,6 +15,9 @@ class AnonymizationPipeline:
 
     This class provides a quick way to apply anonymization techniques to a dataset,
     allowing users to run anonymization pipelines with minimal setup.
+
+    The resulting dataset will contain only the columns where a technique has been applied.
+    To retain a column with its original data, use the Identity technique.
 
     Attributes:
         config: Configuration that specifies the anonymization steps to execute.
@@ -35,8 +41,8 @@ class AnonymizationPipeline:
             result: pd.DataFrame = dataframe.copy()
             for step in self.config.steps:
                 method: BaseSpec = step.method
-                if step.columns is not None:
-                    anonymized: pd.DataFrame = method.anonymize(dataframe.loc[:, step.columns])
+                if step.columns:
+                    anonymized: pd.DataFrame = method.anonymize(result.loc[:, step.columns])
                     if not method.preserve_type:
                         for col_name, dtype in anonymized.dtypes.to_dict().items():
                             result[col_name] = result[col_name].astype(dtype)
@@ -45,4 +51,9 @@ class AnonymizationPipeline:
                 else:
                     result = method.anonymize(result)
 
-            return result
+            used_cols: set[str] = set(
+                itertools.chain.from_iterable(step.columns or dataframe.columns for step in self.config.steps)
+            )
+            unused_cols: set[str] = set(dataframe.columns.to_list()) - used_cols
+
+            return result.drop(labels=cast(list, unused_cols), axis=1)

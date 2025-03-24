@@ -10,6 +10,7 @@ from aindo.anonymize.techniques import (
     Binning,
     CharacterMasking,
     DataNulling,
+    Identity,
     KeyHashing,
     Mocking,
     PerturbationCategorical,
@@ -25,6 +26,7 @@ ALL_TECHNIQUES: list[Type] = [
     CharacterMasking,
     DataNulling,
     KeyHashing,
+    Identity,
     Mocking,
     PerturbationCategorical,
     PerturbationNumerical,
@@ -39,6 +41,7 @@ class TechniqueType(str, Enum):
     CHARACTER_MASKING = "character_masking"
     DATA_NULLING = "data_nulling"
     KEY_HASHING = "key_hashing"
+    IDENTITY = "identity"
     MOCKING = "mocking"
     PERTURBATION_CATEGORICAL = "perturbation_categorical"
     PERTURBATION_NUMERICAL = "perturbation_numerical"

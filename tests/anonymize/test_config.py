@@ -31,34 +31,39 @@ def test_get_type_from_class():
 
 
 @pytest.mark.parametrize(
-    "params,technique_cls,spec_cls,column",
+    "params,technique_cls,spec_cls,columns",
     [
-        ({"bins": 10}, ALL_TECHNIQUES[0], ALL_TECHNIQUES_SPEC[0], "integer"),  # binning
-        ({"mask_length": 3}, ALL_TECHNIQUES[1], ALL_TECHNIQUES_SPEC[1], "string"),  # char masking
-        ({"constant_value": "BLANK"}, ALL_TECHNIQUES[2], ALL_TECHNIQUES_SPEC[2], "string"),  # data nulling
-        ({"key": "key"}, ALL_TECHNIQUES[3], ALL_TECHNIQUES_SPEC[3], "integer"),  # key hashing
-        ({"data_generator": "name", "seed": SEED}, ALL_TECHNIQUES[4], ALL_TECHNIQUES_SPEC[4], "string"),  # mocking
-        ({"alpha": 0.5, "seed": SEED}, ALL_TECHNIQUES[5], ALL_TECHNIQUES_SPEC[5], "categorical"),  # perturbation cat
-        ({"alpha": 0.5, "seed": SEED}, ALL_TECHNIQUES[6], ALL_TECHNIQUES_SPEC[6], "integer"),  # perturbation num
-        ({"alpha": 0.5, "seed": SEED}, ALL_TECHNIQUES[7], ALL_TECHNIQUES_SPEC[7], "integer"),  # swapping
-        ({"q": 0.2}, ALL_TECHNIQUES[8], ALL_TECHNIQUES_SPEC[8], "categorical"),  # top/bottom coding cat
-        ({"q": 0.2}, ALL_TECHNIQUES[9], ALL_TECHNIQUES_SPEC[9], "integer"),  # top/bottom coding num
+        ({"bins": 10}, ALL_TECHNIQUES[0], ALL_TECHNIQUES_SPEC[0], ["integer"]),  # binning
+        ({"mask_length": 3}, ALL_TECHNIQUES[1], ALL_TECHNIQUES_SPEC[1], ["string"]),  # char masking
+        ({"constant_value": "BLANK"}, ALL_TECHNIQUES[2], ALL_TECHNIQUES_SPEC[2], ["string"]),  # data nulling
+        ({"key": "key"}, ALL_TECHNIQUES[3], ALL_TECHNIQUES_SPEC[3], ["integer"]),  # key hashing
+        ({}, ALL_TECHNIQUES[4], ALL_TECHNIQUES_SPEC[4], ["integer", "string"]),  # identity
+        ({"data_generator": "name", "seed": SEED}, ALL_TECHNIQUES[5], ALL_TECHNIQUES_SPEC[5], ["string"]),  # mocking
+        ({"alpha": 0.5, "seed": SEED}, ALL_TECHNIQUES[6], ALL_TECHNIQUES_SPEC[6], ["categorical"]),  # perturbation cat
+        ({"alpha": 0.5, "seed": SEED}, ALL_TECHNIQUES[7], ALL_TECHNIQUES_SPEC[7], ["integer"]),  # perturbation num
+        ({"alpha": 0.5, "seed": SEED}, ALL_TECHNIQUES[8], ALL_TECHNIQUES_SPEC[8], ["integer"]),  # swapping
+        ({"q": 0.2}, ALL_TECHNIQUES[9], ALL_TECHNIQUES_SPEC[9], ["categorical"]),  # top/bottom coding cat
+        ({"q": 0.2}, ALL_TECHNIQUES[10], ALL_TECHNIQUES_SPEC[10], ["integer"]),  # top/bottom coding num
     ],
     ids=[c.__name__ for c in ALL_TECHNIQUES],
 )
 def test_spec_classes(
-    params: dict[str, Any], technique_cls: type, spec_cls: type, column: str, request: pytest.FixtureRequest
+    params: dict[str, Any],
+    technique_cls: type,
+    spec_cls: type,
+    columns: list[str],
+    dataframe_all_types: pd.DataFrame,
 ):
     # Verify that "Spec" classes are, aside from the type attribute, identical to their corresponding technique class,
     # particularly that initialization behaves as expected.
     # For example, previous implementations with dataclasses had issues with parent class initialization methods.
-    col: pd.Series = request.getfixturevalue(f"{column}_column")
+    df = dataframe_all_types.loc[:, [f"{c}_column" for c in columns]]
     technique = technique_cls(**params)
-    t_out = technique.anonymize_column(col)
+    t_out = technique.anonymize(df)
     spec = spec_cls(**params)
-    s_out = spec.anonymize_column(col)
+    s_out = spec.anonymize(df)
 
-    assert (t_out == s_out).all()
+    assert t_out.equals(s_out)
 
 
 @pytest.mark.parametrize(
