@@ -72,16 +72,17 @@ def test_spec_classes(
         ({}, "Invalid input: 'method'"),
         ({"method": {"constant_value": None}}, "Invalid input: 'method'"),
         ({"method": {"type": "wrong-type"}}, "Invalid input: unknown technique"),
+        ({"method": {"type": "identity"}, "columns": []}, "Invalid input: the columns list cannot be empty"),
     ],
-    ids=["missing-method", "missing-type", "unknown-technique"],
+    ids=["missing-method", "missing-type", "unknown-technique", "empty-columns-list"],
 )
 def test_techniqueitem_from_dict_error(value: dict[str, Any], expected_match: str):
     with pytest.raises(ValueError, match=expected_match):
-        TechniqueItem.from_dict({"name": "test name", "columns": [], **value})
+        TechniqueItem.from_dict(value)
 
 
 def test_techniqueitem_from_dict_ok():
-    t = TechniqueItem.from_dict({"name": "test name", "columns": [], "method": {"type": "binning", "bins": 1}})
+    t = TechniqueItem.from_dict({"columns": ["a"], "method": {"type": "binning", "bins": 1}})
     assert t and isinstance(t, TechniqueItem)
 
 

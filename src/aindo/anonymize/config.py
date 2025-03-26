@@ -109,6 +109,8 @@ class TechniqueItem:
     Attributes:
         method: Parameters defining the technique's configuration.
         columns: Input data columns to which the technique will be applied.
+            If set to None, the technique is applied to all columns.
+            An empty list is not allowed and will raise an error.
     """
 
     method: TechniqueMethod
@@ -144,7 +146,10 @@ class TechniqueItem:
         method_kwargs: dict[str, Any] = method_data.copy()
         method_kwargs.pop("type")
         method: TechniqueMethod = method_class(**method_kwargs)
-        return cls(method=method, columns=value.get("columns"))
+        columns: list[str] | None = value.get("columns", None)
+        if columns == []:
+            raise ValueError("Invalid input: the columns list cannot be empty.")
+        return cls(method=method, columns=columns)
 
     def __repr__(self) -> str:
         return f"TechniqueItem(method={self.method!r},columns={self.columns!r})"

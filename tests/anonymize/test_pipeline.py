@@ -99,7 +99,6 @@ def test_repetition():
     }
     workflow = AnonymizationPipeline(config=Config.from_dict(config_data))
     out = workflow.run(df)
-    print(out)
 
     assert out.integer_column.equals(pd.Series(["BL***", "BL***", "BL***"]))
 
@@ -109,7 +108,6 @@ def test_anonymize_all_dataframe():
     config_data: dict[str, Any] = {
         "steps": [
             {
-                "columns": [],
                 "method": {"type": "identity"},
             }
         ]

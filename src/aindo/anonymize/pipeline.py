@@ -37,8 +37,16 @@ class AnonymizationPipeline:
         Returns:
             The anonymized version of the input data.
         """
+        if len(self.config.steps) == 0:
+            return pd.DataFrame()
+
         with pd.option_context("mode.copy_on_write", True):
-            result: pd.DataFrame = dataframe.copy()
+            used_cols: set[str] = set(
+                itertools.chain.from_iterable(step.columns or dataframe.columns for step in self.config.steps)
+            )
+            unused_cols: set[str] = set(dataframe.columns.to_list()) - used_cols
+            result: pd.DataFrame = dataframe.drop(labels=cast(list, unused_cols), axis=1)
+
             for step in self.config.steps:
                 method: BaseSpec = step.method
                 if step.columns:
@@ -51,9 +59,4 @@ class AnonymizationPipeline:
                 else:
                     result = method.anonymize(result)
 
-            used_cols: set[str] = set(
-                itertools.chain.from_iterable(step.columns or dataframe.columns for step in self.config.steps)
-            )
-            unused_cols: set[str] = set(dataframe.columns.to_list()) - used_cols
-
-            return result.drop(labels=cast(list, unused_cols), axis=1)
+            return result
