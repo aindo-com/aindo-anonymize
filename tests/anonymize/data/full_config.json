@@ -5,7 +5,7 @@
         "type": "binning",
         "bins": 10
       },
-      "columns": ["column_a"]
+      "columns": ["column_bin"]
     },
     {
       "method": {
@@ -14,14 +14,14 @@
         "symbol": "*",
         "starting_direction": "left"
       },
-      "columns": ["column_b"]
+      "columns": ["column_mask"]
     },
     {
       "method": {
         "type": "data_nulling",
         "constant_value": "BLANK"
       },
-      "columns": ["column_c"]
+      "columns": ["column_null"]
     },
     {
       "method": {
@@ -30,14 +30,20 @@
         "salt": "my salt",
         "hash_name": "sha256"
       },
-      "columns": ["column_d"]
+      "columns": ["column_key_hash"]
+    },
+    {
+      "method": {
+        "type": "identity"
+      },
+      "columns": ["column_id_1", "column_id_2"]
     },
     {
       "method": {
         "type": "mocking",
         "data_generator": "name"
       },
-      "columns": ["column_e"]
+      "columns": ["column_mock"]
     },
     {
       "method": {
@@ -50,7 +56,7 @@
         ],
         "seed": 42
       },
-      "columns": ["column_f"]
+      "columns": ["column_pert_cat"]
     },
     {
       "method": {
@@ -60,7 +66,7 @@
         "perturbation_range": [1, 10],
         "seed": 42
       },
-      "columns": ["column_g"]
+      "columns": ["column_per_num"]
     },
     {
       "method": {
@@ -68,7 +74,7 @@
         "alpha": 0.8,
         "seed": 42
       },
-      "columns": ["column_h"]
+      "columns": ["column_swap"]
     },
     {
       "method": {
@@ -76,14 +82,14 @@
         "q": 0.8,
         "other_label": "OTHER"
       },
-      "columns": ["column_i"]
+      "columns": ["column_tbc_cat"]
     },
     {
       "method": {
         "type": "top_bottom_coding_numerical",
         "q": 0.3
       },
-      "columns": ["column_l"]
+      "columns": ["column_tbc_num"]
     }
   ]
 }

@@ -81,3 +81,26 @@ def time_column() -> pd.Series:
     start_date: datetime = datetime(2025, 1, 1, tzinfo=timezone.utc)
     values: list[time] = [(start_date + timedelta(days=i)).time() for i in range(COL_SIZE)]
     return pd.Series(values)
+
+
+@pytest.fixture(scope=DEFAULT_SCOPE)
+def dataframe_all_types(
+    integer_column: pd.Series,
+    numerical_column: pd.Series,
+    categorical_column: pd.Series,
+    string_column: pd.Series,
+    datetime_column: pd.Series,
+    date_column: pd.Series,
+    time_column: pd.Series,
+) -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "integer_column": integer_column,
+            "numerical_column": numerical_column,
+            "categorical_column": categorical_column,
+            "string_column": string_column,
+            "datetime_column": datetime_column,
+            "date_column": date_column,
+            "time_column": time_column,
+        }
+    )

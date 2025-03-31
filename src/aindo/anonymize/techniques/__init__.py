@@ -6,6 +6,7 @@ from aindo.anonymize.techniques.binning import Binning
 from aindo.anonymize.techniques.char_masking import CharacterMasking
 from aindo.anonymize.techniques.data_nulling import DataNulling
 from aindo.anonymize.techniques.hashing import KeyHashing
+from aindo.anonymize.techniques.identity import Identity
 from aindo.anonymize.techniques.mocking import Mocking, MockingGeneratorMethods
 from aindo.anonymize.techniques.perturbation import PerturbationCategorical, PerturbationNumerical
 from aindo.anonymize.techniques.swapping import Swapping
@@ -16,6 +17,7 @@ __all__ = [
     "CharacterMasking",
     "DataNulling",
     "KeyHashing",
+    "Identity",
     "Mocking",
     "MockingGeneratorMethods",
     "PerturbationCategorical",

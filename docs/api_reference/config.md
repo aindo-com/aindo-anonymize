@@ -20,7 +20,7 @@ method accepts a Python dictionary following the schema below.
 | `steps[i].method`         | `dict`              | Defines the anonymization technique and its parameters. |
 | `steps[i].method.type`    | `str`               | The name of the anonymization technique in snake_case.  |
 | `steps[i].method.<param>` | `dict`              | Additional key-value pairs for technique-specific parameters. See the [list](./techniques.md#techniques) of anonymization techniques and their respective parameters.    |
-| `steps[i].columns`        | `list[string] | None` | The list of column names to which the anonymization method applies. |
+| `steps[i].columns`        | `list[string] | None` | The list of column names to which the anonymization method applies. If set to None, the technique is applied to all columns. An empty list is not allowed. |
 
 For a full configuration example, see the code below.
 Note that some parameters may be mutually exclusive and are therefore not included in this example.  

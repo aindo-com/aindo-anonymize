@@ -25,6 +25,8 @@ These techniques are implemented as classes that derive from
 
 ## Techniques
 
+::: aindo.anonymize.techniques.identity.Identity
+
 ::: aindo.anonymize.techniques.data_nulling.DataNulling
 
 ::: aindo.anonymize.techniques.char_masking.CharacterMasking
