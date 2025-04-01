@@ -3,8 +3,9 @@
 # SPDX-License-Identifier: MIT
 
 import re
+from dataclasses import dataclass
 from enum import Enum
-from typing import TYPE_CHECKING, Any, Literal, Type, Union
+from typing import TYPE_CHECKING, Any, ClassVar, Literal, Type, Union, get_origin, get_type_hints
 
 from aindo.anonymize.techniques import (
     Binning,
@@ -80,9 +81,28 @@ def _process_technique_class(cls: Type) -> Type:
     ```
     """
     _type: TechniqueType = _get_type_from_class(cls)
-    field_values: dict[str, Any] = {"type": _type}
-    field_annotations: dict[str, Any] = cls.__annotations__
+
+    field_annotations: dict[str, Any] = get_type_hints(cls)
     field_annotations.update({"type": Literal[_type]})
+    field_annotations.update({"_spec_fields": ClassVar[list[str]]})
+
+    field_values: dict[str, Any] = {"type": _type}
+    field_values.update(
+        {
+            "_spec_fields": [
+                name
+                for name, _type in field_annotations.items()
+                if not (name.startswith("_") or get_origin(_type) is ClassVar)
+            ]
+        }
+    )
+
+    def eq(self: object, other: object) -> bool:
+        if other.__class__ is not self.__class__:
+            return NotImplemented
+        return tuple(getattr(self, attr) for attr in getattr(self, "_spec_fields")) == tuple(
+            getattr(other, attr) for attr in getattr(other, "_spec_fields")
+        )
 
     return type(
         f"{cls.__name__}Spec",
@@ -90,7 +110,7 @@ def _process_technique_class(cls: Type) -> Type:
             BaseSpec,
             cls,
         ),
-        {**field_values, "__annotations__": field_annotations},
+        {**field_values, "__annotations__": field_annotations, "__eq__": eq},
     )
 
 
@@ -103,6 +123,7 @@ else:
     """A union of technique classes with an added type attribute."""
 
 
+@dataclass
 class TechniqueItem:
     """Configuration for applying a single anonymization technique.
 
@@ -117,11 +138,9 @@ class TechniqueItem:
     columns: list[str] | None
 
     # Utility mapping from a type to its corresponding spec class.
-    _techniques_mapping: dict[TechniqueType, Type] = {_get_type_from_class(cls): cls for cls in ALL_TECHNIQUES_SPEC}
-
-    def __init__(self, method: TechniqueMethod, columns: list[str] | None):
-        self.method = method
-        self.columns = columns
+    _techniques_mapping: ClassVar[dict[TechniqueType, Type]] = {
+        _get_type_from_class(cls): cls for cls in ALL_TECHNIQUES_SPEC
+    }
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "TechniqueItem":
@@ -151,13 +170,24 @@ class TechniqueItem:
             raise ValueError("Invalid input: the columns list cannot be empty.")
         return cls(method=method, columns=columns)
 
-    def __repr__(self) -> str:
-        return f"TechniqueItem(method={self.method!r},columns={self.columns!r})"
+    def to_dict(self) -> dict[str, Any]:
+        """Converts the instance of the class into a dictionary.
 
-    def __str__(self) -> str:
-        return f"TechniqueItem(method={self.method.__class__.__name__}(...),columns={self.columns!s})"
+        Returns:
+            dict: A dictionary where keys are attribute names and values
+                are the corresponding attribute values of the object.
+        """
+        method_fields: dict[str, Any] = {
+            name: getattr(self.method, name) for name in getattr(self.method, "_spec_fields")
+        }
+        method_fields["type"] = method_fields["type"].value
+        return {
+            "method": method_fields,
+            "columns": self.columns,
+        }
 
 
+@dataclass
 class Config:
     """Configuration for the high-level interface `aindo.anonymize.AnonymizationPipeline`.
 
@@ -166,9 +196,6 @@ class Config:
     """
 
     steps: list[TechniqueItem]
-
-    def __init__(self, steps: list[TechniqueItem]):
-        self.steps = steps
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "Config":
@@ -187,5 +214,11 @@ class Config:
         steps = [TechniqueItem.from_dict(item_data) for item_data in steps_data]
         return cls(steps=steps)
 
-    def __repr__(self) -> str:
-        return f"Config(steps={self.steps!r})"
+    def to_dict(self) -> dict[str, Any]:
+        """Converts the instance of the class into a dictionary.
+
+        Returns:
+            dict: A dictionary where keys are attribute names and values
+                are the corresponding attribute values of the object.
+        """
+        return {"steps": [s.to_dict() for s in self.steps]}
