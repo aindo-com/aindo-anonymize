@@ -5,7 +5,7 @@
 import re
 from dataclasses import dataclass
 from enum import Enum
-from typing import TYPE_CHECKING, Any, ClassVar, Literal, Type, Union, get_origin, get_type_hints
+from typing import TYPE_CHECKING, Any, ClassVar, Literal, Union, get_origin, get_type_hints
 
 from aindo.anonymize.techniques import (
     Binning,
@@ -22,7 +22,7 @@ from aindo.anonymize.techniques import (
 )
 from aindo.anonymize.techniques.base import BaseTechnique
 
-ALL_TECHNIQUES: list[Type] = [
+ALL_TECHNIQUES: list[type[BaseTechnique]] = [
     Binning,
     CharacterMasking,
     DataNulling,
@@ -51,7 +51,7 @@ class TechniqueType(str, Enum):
     TOP_BOTTOM_CODING_NUMERICAL = "top_bottom_coding_numerical"
 
 
-def _get_type_from_class(cls: Type) -> TechniqueType:
+def _get_type_from_class(cls: type[BaseTechnique]) -> TechniqueType:
     """Get the `TechniqueType` for the given technique or spec class."""
     type_name: str = re.sub(r"([a-z])([A-Z])", r"\1_\2", cls.__name__)
     type_name = type_name.upper()
@@ -67,10 +67,16 @@ class BaseSpec(BaseTechnique):
         type: Specifies which technique this configuration applies to.
     """
 
+    _spec_fields: ClassVar[tuple[str, ...]]
     type: TechniqueType
 
+    def __eq__(self, other) -> bool:
+        if other.__class__ is not self.__class__:
+            return NotImplemented
+        return all(getattr(self, attr) == getattr(other, attr) for attr in self._spec_fields)
 
-def _process_technique_class(cls: Type) -> Type:
+
+def _process_technique_class(cls: type[BaseTechnique]) -> type[BaseSpec]:
     """Derive a new class from a technique class by adding a type attribute.
 
     For example, a class derived from `DataNulling` will be equivalent to:
@@ -83,26 +89,16 @@ def _process_technique_class(cls: Type) -> Type:
     _type: TechniqueType = _get_type_from_class(cls)
 
     field_annotations: dict[str, Any] = get_type_hints(cls)
-    field_annotations.update({"type": Literal[_type]})
-    field_annotations.update({"_spec_fields": ClassVar[list[str]]})
+    field_annotations["type"] = Literal[_type]
 
     field_values: dict[str, Any] = {"type": _type}
-    field_values.update(
-        {
-            "_spec_fields": [
-                name
-                for name, _type in field_annotations.items()
-                if not (name.startswith("_") or get_origin(_type) is ClassVar)
-            ]
-        }
+    field_values["_spec_fields"] = tuple(
+        [
+            name
+            for name, _type in field_annotations.items()
+            if not (name.startswith("_") or get_origin(_type) is ClassVar)
+        ]
     )
-
-    def eq(self: object, other: object) -> bool:
-        if other.__class__ is not self.__class__:
-            return NotImplemented
-        return tuple(getattr(self, attr) for attr in getattr(self, "_spec_fields")) == tuple(
-            getattr(other, attr) for attr in getattr(other, "_spec_fields")
-        )
 
     return type(
         f"{cls.__name__}Spec",
@@ -110,11 +106,11 @@ def _process_technique_class(cls: Type) -> Type:
             BaseSpec,
             cls,
         ),
-        {**field_values, "__annotations__": field_annotations, "__eq__": eq},
+        {**field_values, "__annotations__": field_annotations},
     )
 
 
-ALL_TECHNIQUES_SPEC: list[Type] = [_process_technique_class(c) for c in ALL_TECHNIQUES]
+ALL_TECHNIQUES_SPEC: tuple[type[BaseSpec], ...] = tuple([_process_technique_class(c) for c in ALL_TECHNIQUES])
 
 if TYPE_CHECKING:
     TechniqueMethod = BaseSpec
@@ -138,7 +134,7 @@ class TechniqueItem:
     columns: list[str] | None
 
     # Utility mapping from a type to its corresponding spec class.
-    _techniques_mapping: ClassVar[dict[TechniqueType, Type]] = {
+    _techniques_mapping: ClassVar[dict[TechniqueType, type[BaseSpec]]] = {
         _get_type_from_class(cls): cls for cls in ALL_TECHNIQUES_SPEC
     }
 
@@ -158,7 +154,7 @@ class TechniqueItem:
             raise ValueError("Invalid input: 'method' field must have a 'type' key")
 
         method_type: TechniqueType = method_data.get("type", "")
-        method_class: Type | None = cls._techniques_mapping.get(method_type, None)
+        method_class: type[BaseSpec] | None = cls._techniques_mapping.get(method_type, None)
         if method_class is None:
             raise ValueError(f"Invalid input: unknown technique type '{method_type}'")
 
