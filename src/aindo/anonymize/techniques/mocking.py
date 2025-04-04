@@ -88,6 +88,7 @@ class Mocking(BaseSingleColumnTechnique):
         if fake_method is None:
             raise ValueError(f"Faker's generator method '{data_generator}' not found")
 
+        self.data_generator = data_generator
         self._fake: Faker = fake
         self.seed = seed
         if seed is not None:

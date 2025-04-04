@@ -20,6 +20,15 @@ from tests.anonymize.conftest import SEED
 from tests.anonymize.utils import file_data_path
 
 
+@pytest.fixture(scope="module")
+def full_config() -> dict:
+    """Return the complete configuration as a dictionary."""
+    # Note: full_config file should contain all the techniques with all parameters.
+    with open(file_data_path("full_config.json"), "r") as filein:
+        config_data: dict = json.load(filein)
+    return config_data
+
+
 def test_get_type_from_class():
     for _cls, _type in zip(ALL_TECHNIQUES, TechniqueType):
         out: TechniqueType = _get_type_from_class(_cls)
@@ -66,37 +75,67 @@ def test_spec_classes(
     assert t_out.equals(s_out)
 
 
-@pytest.mark.parametrize(
-    "value,expected_match",
-    [
-        ({}, "Invalid input: 'method'"),
-        ({"method": {"constant_value": None}}, "Invalid input: 'method'"),
-        ({"method": {"type": "wrong-type"}}, "Invalid input: unknown technique"),
-        ({"method": {"type": "identity"}, "columns": []}, "Invalid input: the columns list cannot be empty"),
-    ],
-    ids=["missing-method", "missing-type", "unknown-technique", "empty-columns-list"],
-)
-def test_techniqueitem_from_dict_error(value: dict[str, Any], expected_match: str):
-    with pytest.raises(ValueError, match=expected_match):
-        TechniqueItem.from_dict(value)
+class TestTechniqueItem:
+    @pytest.mark.parametrize(
+        "value,expected_match",
+        [
+            ({}, "Invalid input: 'method'"),
+            ({"method": {"constant_value": None}}, "Invalid input: 'method'"),
+            ({"method": {"type": "wrong-type"}}, "Invalid input: unknown technique"),
+            ({"method": {"type": "identity"}, "columns": []}, "Invalid input: the columns list cannot be empty"),
+        ],
+        ids=["missing-method", "missing-type", "unknown-technique", "empty-columns-list"],
+    )
+    def test_from_dict_error(self, value: dict[str, Any], expected_match: str):
+        with pytest.raises(ValueError, match=expected_match):
+            TechniqueItem.from_dict(value)
 
+    def test_from_dict_ok(self, full_config: dict):
+        for technique_dict in full_config["steps"]:
+            t = TechniqueItem.from_dict(technique_dict)
+            assert t and isinstance(t, TechniqueItem)
 
-def test_techniqueitem_from_dict_ok():
-    t = TechniqueItem.from_dict({"columns": ["a"], "method": {"type": "binning", "bins": 1}})
-    assert t and isinstance(t, TechniqueItem)
+    def test_to_dict(self, full_config: dict):
+        for technique_dict in full_config["steps"]:
+            t = TechniqueItem.from_dict(technique_dict)
+            out_dict = t.to_dict()
+            # Remove unset attributes since we don't have them in the written config
+            out_dict["method"] = {k: v for k, v in out_dict["method"].items() if v is not None}
+            assert technique_dict == out_dict
+
+    @pytest.mark.parametrize(
+        "a,b,result",
+        [
+            ({"type": "swapping", "alpha": 0.8}, {"type": "swapping", "alpha": 0.8}, True),
+            (
+                {"type": "swapping", "alpha": 0.8, "seed": None},
+                {"type": "swapping", "alpha": 0.8},
+                True,
+            ),
+            ({"type": "swapping", "alpha": 0.8}, {"type": "swapping", "alpha": 0}, False),
+            ({"type": "data_nulling"}, {"type": "swapping", "alpha": 0}, False),
+        ],
+        ids=["same-param", "seed-is-None", "diff-param", "diff-technique"],
+    )
+    def test_equality(self, a: dict, b: dict, result: bool):
+        t1 = TechniqueItem.from_dict({"method": a, "columns": ["a"]})
+        t2 = TechniqueItem.from_dict({"method": b, "columns": ["a"]})
+        assert (t1 == t2) == result
 
 
 class TestConfig:
-    @pytest.fixture(scope="class")
-    def full_config(self) -> dict:
-        # Note: full_config file should contain all the techniques with all parameters.
-        with open(file_data_path("full_config.json"), "r") as filein:
-            config_data: dict = json.load(filein)
-        return config_data
-
-    def test_from_dict(self):
+    def test_from_dict_error(self):
         with pytest.raises(ValueError, match="Invalid input: 'steps'"):
             Config.from_dict({})
+
+    def test_from_dict_ok(self, full_config: dict):
+        c = Config.from_dict(full_config)
+        assert c and isinstance(c, Config)
+
+    def test_to_dict(self, full_config: dict):
+        c = Config.from_dict(full_config)
+        out_dict = c.to_dict()
+        assert isinstance(out_dict["steps"], list) and len(out_dict["steps"]) == len(c.steps)
 
     def test_full_config(self, full_config: dict):
         # Test a complete configuration to ensure every technique is correctly loaded
