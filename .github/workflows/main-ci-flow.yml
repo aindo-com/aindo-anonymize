@@ -27,6 +27,25 @@ jobs:
       python-version: ${{ matrix.python-version }}
       skip-coverage: ${{ matrix.python-version != '3.10' }} # Run coverage analysis only once.
 
+  docs-build:
+    name: Build and verify docs
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+  
+      - name: Install requirements
+        run: pip install -r docs/requirements.txt
+        
+      - name: Build documentation
+        run: mkdocs build 
+
   docs-publish:
     name: Publish documentation for version 'dev'
     needs: [pre-commit, tests]
