@@ -1,0 +1,33 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Aindo SpA
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+[data-md-color-scheme="default"] {
+    /* Footer */
+    --md-footer-fg-color:           black;
+    --md-footer-fg-color--light:    #6100FF;
+    --md-footer-fg-color--lighter:  black;
+    --md-footer-bg-color:           white;
+    --md-footer-bg-color--dark:     white;   
+}
+
+
+[data-md-color-scheme="slate"] {
+    /* Primary color shades */
+    --md-primary-fg-color:          #1E293B;
+
+    /* Accent color shades */
+    --md-accent-fg-color:           white;
+
+    /* Default color shades */
+    --md-default-bg-color:          #0F172A;
+
+    /* Typeset `a` color shades */
+    --md-typeset-a-color:           #CBD5E1;
+    
+    /* Footer */
+    --md-footer-bg-color:           #1E293B;
+    --md-footer-bg-color--dark:     #1E293B;   
+}

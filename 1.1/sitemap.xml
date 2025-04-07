@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/api_reference/config/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/api_reference/pipeline/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/api_reference/techniques/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/developers/changelog/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/developers/contributing/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/get_started/overview/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.anonymize.aindo.com/latest/get_started/quickstart/</loc>
+         <lastmod>2025-04-07</lastmod>
+    </url>
+</urlset>
