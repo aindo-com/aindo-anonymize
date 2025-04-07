@@ -6,6 +6,20 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.1.0](https://github.com/aindo-com/aindo-anonymize/compare/v1.0.1...v1.1.0) (2025-04-07)
+
+
+### Features
+
+* add identity technique ([#7](https://github.com/aindo-com/aindo-anonymize/issues/7)) ([ee9f7f2](https://github.com/aindo-com/aindo-anonymize/commit/ee9f7f2dc1a74436cf92f85dcd6b6ff5cad7925e))
+* method `to_dict` for config classes ([#8](https://github.com/aindo-com/aindo-anonymize/issues/8)) ([d84955c](https://github.com/aindo-com/aindo-anonymize/commit/d84955c0e69022d7000ee9317679d44ec1170b56))
+
+
+### Documentation
+
+* change fonts ([68b47c9](https://github.com/aindo-com/aindo-anonymize/commit/68b47c9eb48ad48f773136a1b868ddd20d782f57))
+* minor fixes ([d7a3518](https://github.com/aindo-com/aindo-anonymize/commit/d7a3518760b9913f8f8dac29bd61d6f7d5e390ab))
+
 ## [1.0.1](https://github.com/aindo-com/aindo-anonymize/compare/v1.0.0...v1.0.1) (2025-03-07)
 
 
