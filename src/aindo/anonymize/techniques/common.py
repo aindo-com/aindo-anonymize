@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Mixin class implementations."""
+
 from numpy.random import Generator, default_rng
 
 SeedT = int | Generator | None
