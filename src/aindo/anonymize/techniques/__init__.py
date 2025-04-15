@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of all anonymization techniques."""
+
 from aindo.anonymize.techniques.binning import Binning
 from aindo.anonymize.techniques.char_masking import CharacterMasking
 from aindo.anonymize.techniques.data_nulling import DataNulling

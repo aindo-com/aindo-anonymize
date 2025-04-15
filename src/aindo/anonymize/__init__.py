@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""A lightweight Python library for anonymizing tabular data."""
+
 from aindo.anonymize import version as aindo_version
 from aindo.anonymize.config import Config
 from aindo.anonymize.pipeline import AnonymizationPipeline
