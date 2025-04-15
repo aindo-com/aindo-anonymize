@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the binning technique."""
+
 from typing import ClassVar, Sequence
 
 import pandas as pd

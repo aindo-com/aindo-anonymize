@@ -49,7 +49,7 @@ dev = [
   "pandas-stubs",
   # The following are also installed by pre-commit
   # Note: ensure these versions match those specified in the pre-commit configuration.
-  "ruff==0.9.2",
+  "ruff==0.11.5",
   "gitlint==0.19.1",
   "reuse==5.0.2",
 ]
@@ -66,11 +66,23 @@ version = { attr = "aindo.anonymize.version.__version__" }
 
 [tool.ruff]
 line-length = 120
-lint.pycodestyle.max-doc-length = 120
-lint.pycodestyle.max-line-length = 120
-lint.extend-select = ["TID252", "I"]
-lint.extend-safe-fixes = ["TID252"]
-lint.flake8-tidy-imports.ban-relative-imports = "all"
+
+[tool.ruff.lint]
+select = [
+  'I',      # isort
+  'D',      # pydocstyle
+  "TID252", # flake8-tidy-imports
+]
+ignore = ["D105", "D107"]
+pydocstyle.convention = "google"
+pycodestyle.max-doc-length = 120
+pycodestyle.max-line-length = 120
+extend-safe-fixes = ["TID252"]
+flake8-tidy-imports.ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+"docs/*" = ["D"]
+"tests/*" = ["D"]
 
 [tool.pyright]
 include = ["src/*"]

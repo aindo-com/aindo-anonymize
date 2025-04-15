@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Configuration for the high-level interface `aindo.anonymize.AnonymizationPipeline`."""
+
 import re
 from dataclasses import dataclass
 from enum import Enum
@@ -38,6 +40,8 @@ ALL_TECHNIQUES: list[type[BaseTechnique]] = [
 
 
 class TechniqueType(str, Enum):
+    """An enumeration of anonymization techniques."""
+
     BINNING = "binning"
     CHARACTER_MASKING = "character_masking"
     DATA_NULLING = "data_nulling"

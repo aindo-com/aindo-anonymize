@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Base class implementations for anonymization techniques."""
+
 from abc import ABC, abstractmethod
 from typing import ClassVar
 

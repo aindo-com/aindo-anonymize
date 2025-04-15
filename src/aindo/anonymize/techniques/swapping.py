@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the swapping technique."""
+
 import pandas as pd
 
 from aindo.anonymize.techniques.base import BaseSingleColumnTechnique

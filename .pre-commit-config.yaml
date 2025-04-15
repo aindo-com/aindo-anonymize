@@ -20,7 +20,7 @@ repos:
     args: [--contrib=CT1, --msg-filename]
   - id: gitlint-ci
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.9.2
+  rev: v0.11.5
   hooks:
     - id: ruff
       args: [--fix]

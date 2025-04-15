@@ -106,11 +106,13 @@ balancing brevity with completeness to ensure all essential information is inclu
 Ensure that all code is well-documented using properly formatted docstrings.
 The following elements should include documentation:
 
+- Modules
 - Class definitions
 - Function definitions
 - Module-level variables
 
 **Aindo Anonymize** follows [Google-style docstrings](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+formatted according to [PEP 257](https://www.python.org/dev/peps/pep-0257/) guidelines
 (see [Example Google Style Python Docstrings](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
 for further examples).  
 Class attributes and function arguments should be documented in the format `name: description.`,

@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the character masking technique."""
+
 from typing import AnyStr, ClassVar, Generic, Literal
 
 import pandas as pd
