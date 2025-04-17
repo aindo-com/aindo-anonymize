@@ -4,7 +4,7 @@
 
 [project]
 name = "aindo-anonymize"
-description = "A lightweight Python library for anonymizing tabular data."
+description = "A lightweight Python library for anonymizing and pseudonymizing tabular data."
 authors = [{ name = "Aindo SpA", email = "hello@aindo.com" }]
 license = { file = "LICENSES/MIT.txt" }
 dynamic = ["version"]

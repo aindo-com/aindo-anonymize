@@ -10,8 +10,8 @@ SPDX-License-Identifier: MIT
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/aindo-anonymize.svg)](https://github.com/aindo-com/aindo-anonymize)
 [![PyPI - License](https://img.shields.io/pypi/l/aindo-anonymize)](https://github.com/aindo-com/aindo-anonymize/blob/main/LICENSES/MIT.txt)
 
-**Aindo Anonymize** is a lightweight Python library that provides various techniques
-for anonymizing tabular data.
+**Aindo Anonymize** is a lightweight Python library that provides various
+pseudonymization techniques for anonymizing tabular data.
 
 ## Quick start
 
@@ -20,7 +20,7 @@ for anonymizing tabular data.
 pip install aindo-anonymize
 ```
 
-### Start Anonymizing
+### Start anonymizing
 
 Initialize the desired anonymization technique class, set its options,
 and apply the anonymize method to your data.
