@@ -13,8 +13,7 @@ SPDX-License-Identifier: MIT
 Welcome to the documentation of the **Aindo Anonymize** library.
 
 **Aindo Anonymize** is a lightweight Python library for anonymizing tabular data,
-offering a collection of techniques such as masking, mocking, perturbation, and
-more.
+offering a collection of pseudonymization techniques such as masking, mocking, perturbation, and more.
 
 ## Installation
 
