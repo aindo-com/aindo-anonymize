@@ -4,4 +4,4 @@
 
 """The `version` module holds the version information for Aindo Anonymize."""
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"

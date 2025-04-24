@@ -6,6 +6,13 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.1.1](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.0...v1.1.1) (2025-04-24)
+
+
+### Documentation
+
+* clarify that the process is "pseudonymisation" ([98bc600](https://github.com/aindo-com/aindo-anonymize/commit/98bc6008b64e15f498aaffb1eaebaafdb3997b6f))
+
 ## [1.1.0](https://github.com/aindo-com/aindo-anonymize/compare/v1.0.1...v1.1.0) (2025-04-07)
 
 
