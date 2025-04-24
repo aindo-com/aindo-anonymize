@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the data nulling technique."""
+
 from typing import Any, ClassVar
 
 import pandas as pd

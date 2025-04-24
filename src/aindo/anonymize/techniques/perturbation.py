@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the perturbation technique."""
+
 from __future__ import annotations
 
 from abc import ABC

@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the mocking technique."""
+
 from functools import partial
 from typing import Any, Callable, ClassVar, Literal
 
@@ -50,6 +52,7 @@ MockingGeneratorMethods = Literal[
     "user_agent","user_name","uuid4","windows_platform_token","word","words","year","zip","zipcode",
     "zipcode_in_state","zipcode_plus4",
 ]
+"""List all available generator methods from Faker (`fake`)."""
 # fmt: on
 
 
@@ -76,9 +79,11 @@ class Mocking(BaseSingleColumnTechnique):
         faker_kwargs: dict[str, Any] | None = None,
         faker_generator_kwargs: dict[str, Any] | None = None,
     ) -> None:
-        """
+        """Initializes the Mocking technique.
+
         Args:
             data_generator: Faker's generator method ("fake") used to generate data (e.g., name, email).
+            seed: A seed to initialize numpy `Generator`.
             faker_kwargs: Additional arguments passed to the main Faker object (proxy class).
             faker_generator_kwargs: Additional arguments passed to the Faker's generator method.
         """

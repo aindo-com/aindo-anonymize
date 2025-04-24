@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the top/bottom coding technique."""
+
 from typing import Any, ClassVar
 
 import pandas as pd

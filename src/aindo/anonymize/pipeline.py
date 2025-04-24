@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""A high-level interface for orchestrating the anonymization process."""
+
 import itertools
 from typing import cast
 

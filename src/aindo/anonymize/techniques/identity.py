@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the identity technique."""
 
 import pandas as pd
 
@@ -19,4 +20,12 @@ class Identity(BaseTechnique):
         super().__init__()
 
     def anonymize(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        """Anonymize the input data using the identity technique.
+
+        Args:
+            dataframe: The input data to be anonymized.
+
+        Returns:
+            The anonymized version of the input data.
+        """
         return dataframe.copy()

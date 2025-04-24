@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Implementation of the hashing technique."""
+
 import hashlib
 import hmac
 import secrets
@@ -54,4 +56,9 @@ class KeyHashing(BaseSingleColumnTechnique):
 
     @classmethod
     def generate_salt(cls) -> str:
+        """Generates a random salt.
+
+        Returns:
+            str: A random salt.
+        """
         return secrets.token_hex(16)
