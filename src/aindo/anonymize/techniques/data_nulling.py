@@ -30,4 +30,4 @@ class DataNulling(BaseSingleColumnTechnique):
         self.constant_value = constant_value
 
     def _apply_to_col(self, col: pd.Series) -> pd.Series:
-        return pd.Series([self.constant_value for _ in col], dtype=type(self.constant_value))
+        return pd.Series([self.constant_value for _ in col])
