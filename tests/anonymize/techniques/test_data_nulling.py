@@ -17,3 +17,11 @@ def test_data_nulling(column_type: str, request: pytest.FixtureRequest):
 
     assert column.size == out.size
     assert (out == "BLANK").all()
+
+
+def test_constant_is_none(integer_column: pd.Series):
+    anonymizer = DataNulling(constant_value=None)
+    out = anonymizer.anonymize_column(integer_column)
+
+    assert (out.isna()).all()
+    assert out.dtype == object
