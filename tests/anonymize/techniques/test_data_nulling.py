@@ -7,6 +7,7 @@ import pytest
 
 from aindo.anonymize.techniques.data_nulling import DataNulling
 from tests.anonymize.conftest import COLUMN_NAMES
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 
 @pytest.mark.parametrize("column_type", COLUMN_NAMES)
@@ -25,3 +26,11 @@ def test_constant_is_none(integer_column: pd.Series):
 
     assert (out.isna()).all()
     assert out.dtype == object
+
+
+def test_with_missing_values(string_column: pd.Series):
+    anonymizer = DataNulling(constant_value="BLANK")
+    input = insert_missing_values(string_column)
+    out: pd.Series = anonymizer.anonymize_column(input)
+
+    assert_missing_values(out, preserved=False)

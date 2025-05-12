@@ -8,6 +8,7 @@ import pytest
 
 from aindo.anonymize.techniques.swapping import Swapping
 from tests.anonymize.conftest import COLUMN_NAMES
+from tests.anonymize.utils import insert_missing_values
 
 
 def test_has_random_generator():
@@ -30,3 +31,12 @@ def test_full_swapping(rng: np.random.Generator, column_type: str, request: pyte
 
     assert out.size == column.size
     assert set(out) == set(column)
+
+
+def test_with_missing_values(rng: np.random.Generator, numerical_column: pd.Series):
+    anonymizer = Swapping(alpha=1, seed=rng)
+    input = insert_missing_values(numerical_column)
+    out: pd.Series = anonymizer.anonymize_column(input)
+
+    # Missing values are still present, but their positions have changed
+    assert sum(out.isna()) == 2

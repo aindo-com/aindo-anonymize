@@ -52,7 +52,7 @@ class KeyHashing(BaseSingleColumnTechnique):
         return b64encode(hmac_obj.digest()).decode()
 
     def _apply_to_col(self, col: pd.Series) -> pd.Series:
-        return pd.Series([self._compute_hash(value) for value in col], dtype="str")
+        return pd.Series([self._compute_hash(value) if pd.notna(value) else value for value in col], dtype="str")
 
     @classmethod
     def generate_salt(cls) -> str:

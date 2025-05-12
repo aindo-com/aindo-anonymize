@@ -14,8 +14,8 @@ from aindo.anonymize.techniques.base import BaseSingleColumnTechnique
 class DataNulling(BaseSingleColumnTechnique):
     """Implements data nulling.
 
-    Data nulling replaces the original data with a `None` value
-    (or a custom constant value).
+    Data nulling replaces the original data with a constant value.
+    Missing values (`np.NaN`, `None`, `pd.NA`, `pd.NaT`) are also replaced.
 
     Attributes:
         constant_value: The value that will replace the original data. Default to None.

@@ -14,6 +14,7 @@ from tests.anonymize.conftest import COLUMN_NAMES
 SECRET_KEY: Literal["secret"] = "secret"
 SALT: Literal["salt"] = "salt"
 HASH_PATTERN: re.Pattern = re.compile(r"^[-A-Za-z0-9+/]*={0,3}$")
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 
 def wrong_hash_name():
@@ -43,3 +44,11 @@ def test_hashing(column_type: str, request: pytest.FixtureRequest):
 
     assert column.size == out.size
     assert out.apply(lambda x: bool(HASH_PATTERN.match(x))).all()
+
+
+def test_with_missing_values(string_column: pd.Series):
+    anonymizer = KeyHashing(key=SECRET_KEY, salt=SALT)
+    input = insert_missing_values(string_column)
+    out: pd.Series = anonymizer.anonymize_column(input)
+
+    assert_missing_values(out, preserved=True)

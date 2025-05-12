@@ -8,6 +8,7 @@ import pandas as pd
 import pytest
 
 from aindo.anonymize.techniques.char_masking import CharacterMasking, StartingDirection
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 
 @pytest.mark.parametrize("column_name", ["string_column", "categorical_column"])
@@ -70,3 +71,11 @@ def test_masking_symbol(string_column: pd.Series):
     assert string_column.size == out.size
     for _, value in out.items():
         assert value[0] == symbol
+
+
+def test_with_missing_values(string_column: pd.Series):
+    anonymizer = CharacterMasking[str]()
+    input = insert_missing_values(string_column)
+    out: pd.Series = anonymizer.anonymize_column(input)
+
+    assert_missing_values(out, preserved=True)

@@ -8,6 +8,7 @@ import pandas as pd
 import pytest
 
 from aindo.anonymize.techniques.top_bottom_coding import TopBottomCodingCategorical, TopBottomCodingNumerical
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 
 class TestTopBottomCodingNumerical:
@@ -59,6 +60,13 @@ class TestTopBottomCodingNumerical:
 
         median: float = integer_column.median()
         assert (out == median).all()
+
+    def test_with_missing_values(self, numerical_column: pd.Series):
+        anonymizer = TopBottomCodingNumerical(1)
+        input = insert_missing_values(numerical_column)
+        out = anonymizer.anonymize_column(input)
+
+        assert_missing_values(out, preserved=True)
 
 
 class TestTopBottomCodingCategorical:
@@ -118,3 +126,10 @@ class TestTopBottomCodingCategorical:
         assert len(out.cat.categories) == 1
         assert out.cat.categories[0] == TopBottomCodingCategorical.other_label
         assert (out.values == TopBottomCodingCategorical.other_label).all()
+
+    def test_with_missing_values(self, categorical_column: pd.Series):
+        anonymizer = TopBottomCodingCategorical(1)
+        input = insert_missing_values(categorical_column)
+        out = anonymizer.anonymize_column(input)
+
+        assert_missing_values(out, preserved=True)
