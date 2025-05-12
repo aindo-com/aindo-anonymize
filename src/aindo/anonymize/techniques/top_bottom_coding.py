@@ -6,6 +6,7 @@
 
 from typing import Any, ClassVar
 
+import numpy as np
 import pandas as pd
 
 from aindo.anonymize.techniques.base import BaseSingleColumnTechnique
@@ -116,4 +117,6 @@ class TopBottomCodingCategorical(BaseSingleColumnTechnique):
         out = out.cat.remove_categories(rare_categories)
         out = out.cat.add_categories(self.other_label)
         out.fillna(self.other_label, inplace=True)
+        out[col.isna()] = np.nan
+
         return out

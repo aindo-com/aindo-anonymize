@@ -62,6 +62,8 @@ class Mocking(BaseSingleColumnTechnique):
     Mocking generates realistic mock data for various fields such as names, addresses, emails, and more.
     It leverages the `faker` library to produce customizable, locale-aware fake data.
 
+    Missing values (`np.NaN`, `None`, `pd.NA`, `pd.NaT`) are replaced.
+
     Attributes:
         data_generator: Faker's generator method ("fake") used to generate data (e.g., name, email).
         seed: A seed to initialize numpy `Generator`.

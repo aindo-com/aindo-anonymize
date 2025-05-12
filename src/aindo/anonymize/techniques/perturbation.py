@@ -85,7 +85,7 @@ class PerturbationNumerical(BasePerturbation, Generic[NumericsT]):
 
             random_values: np.ndarray = self.generator.uniform(low=min_, high=max_, size=col.size)
             col_out: pd.Series = (1 - self.alpha) * col + self.alpha * random_values
-            return col_out.astype(col.dtype)
+            return col_out
 
 
 class PerturbationCategorical(BasePerturbation):
@@ -133,5 +133,7 @@ class PerturbationCategorical(BasePerturbation):
             np.array(list(frequencies.values())) if self.sampling_mode == "weighted" else None
         )
         rand_values = self.generator.choice(categories, size=col.size, p=probabilities)
+        mask: np.ndarray = col.notna().to_numpy()
+        mask &= self.generator.random(col.size) <= self.alpha
 
-        return pd.Series(np.where(self.generator.random() <= self.alpha, rand_values, col), dtype="category")
+        return pd.Series(np.where(mask, rand_values, col), dtype="category")

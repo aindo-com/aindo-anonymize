@@ -10,6 +10,7 @@ from faker import Faker
 
 from aindo.anonymize.techniques.mocking import Mocking, MockingGeneratorMethods
 from tests.anonymize.conftest import SEED
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 
 def test_mocking_wrong_param():
@@ -53,3 +54,11 @@ def test_faker_generator_methods():
     for method_name in methods:
         method = getattr(fake, method_name, None)
         assert method is not None
+
+
+def test_with_missing_values(string_column: pd.Series):
+    anonymizer = Mocking(data_generator="name")
+    input = insert_missing_values(string_column)
+    out: pd.Series = anonymizer.anonymize_column(input)
+
+    assert_missing_values(out, preserved=False)

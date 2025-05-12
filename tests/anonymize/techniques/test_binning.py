@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 import pandas as pd
 
 from aindo.anonymize.techniques.binning import Binning
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 
 def test_binning_out_type(integer_column: pd.Series):
@@ -59,3 +60,11 @@ def test_binning_datetime(datetime_column):
 
     assert datetime_column.size == out.size
     assert (out.cat.categories == categories).all()
+
+
+def test_with_missing_values(integer_column: pd.Series):
+    anonymizer = Binning(bins=[0, 12, 20, 30])
+    input = insert_missing_values(integer_column)
+    out = anonymizer.anonymize_column(input)
+
+    assert_missing_values(out, preserved=True)

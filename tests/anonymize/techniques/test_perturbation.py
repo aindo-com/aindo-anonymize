@@ -11,7 +11,12 @@ from scipy import stats
 
 from aindo.anonymize.techniques.perturbation import PerturbationCategorical, PerturbationNumerical, SamplingMode
 from tests.anonymize.conftest import FLOAT_TYPE, INT_TYPE
-from tests.anonymize.utils import assert_categorical_distribution, assert_same_distribution
+from tests.anonymize.utils import (
+    assert_categorical_distribution,
+    assert_missing_values,
+    assert_same_distribution,
+    insert_missing_values,
+)
 
 
 class TestPerturbationNumerical:
@@ -65,6 +70,20 @@ class TestPerturbationNumerical:
 
         assert_same_distribution(column, out)
 
+    @pytest.mark.parametrize(
+        "sampling_mode",
+        get_args(SamplingMode),
+        ids=[f"sampling_{val}" for val in get_args(SamplingMode)],
+    )
+    def test_with_missing_values(
+        self, rng: np.random.Generator, numerical_column: pd.Series, sampling_mode: SamplingMode
+    ):
+        anonymizer = PerturbationNumerical[float](alpha=1, sampling_mode=sampling_mode, seed=rng)
+        input = insert_missing_values(numerical_column)
+        out = anonymizer.anonymize_column(input)
+
+        assert_missing_values(out, preserved=True)
+
 
 class TestPerturbationCategorical:
     def test_has_random_generator(self):
@@ -108,3 +127,17 @@ class TestPerturbationCategorical:
 
         assert categorical_column.cat.categories.equals(out.cat.categories)
         assert_categorical_distribution(out, categorical_column)
+
+    @pytest.mark.parametrize(
+        "sampling_mode",
+        get_args(SamplingMode),
+        ids=[f"sampling_{val}" for val in get_args(SamplingMode)],
+    )
+    def test_with_missing_values(
+        self, rng: np.random.Generator, categorical_column: pd.Series, sampling_mode: SamplingMode
+    ):
+        anonymizer = PerturbationCategorical(alpha=1, sampling_mode=sampling_mode, seed=rng)
+        input = insert_missing_values(categorical_column)
+        out = anonymizer.anonymize_column(input)
+
+        assert_missing_values(out, preserved=True)

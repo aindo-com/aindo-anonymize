@@ -4,6 +4,7 @@
 
 import os
 
+import numpy as np
 import pandas as pd
 from numpy.typing import ArrayLike
 from scipy.stats import chisquare, ks_2samp
@@ -44,3 +45,22 @@ def file_data_path(*path: str) -> str:
             *path,
         )
     )
+
+
+def insert_missing_values(sr: pd.Series) -> pd.Series:
+    """Returns the input Series with the first and last values as NaN."""
+    out = sr.copy()
+    out.iat[0] = np.nan
+    out.iat[-1] = np.nan
+    return out
+
+
+def assert_missing_values(sr: pd.Series, preserved: bool) -> None:
+    """Assert that missing values are either preserved or overwritten (i.e., no longer present).
+
+    Intended for use in conjunction with `insert_missing_values`.
+    """
+    if preserved:
+        assert pd.isna(sr.iat[0]) and pd.isna(sr.iat[-1])
+    else:
+        assert all(sr.notna())

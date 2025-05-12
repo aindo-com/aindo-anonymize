@@ -61,4 +61,4 @@ class CharacterMasking(BaseSingleColumnTechnique, Generic[AnyStr]):
         return mask + value[self.mask_length :]
 
     def _apply_to_col(self, col: pd.Series) -> pd.Series:
-        return pd.Series([self._compute_mask(value) for value in col], dtype="str")
+        return pd.Series([self._compute_mask(value) if pd.notna(value) else value for value in col], dtype="str")
