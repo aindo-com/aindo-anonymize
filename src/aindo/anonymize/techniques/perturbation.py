@@ -65,7 +65,14 @@ class PerturbationNumerical(BasePerturbation, Generic[NumericsT]):
             return col.copy()
 
         if self.sampling_mode == "weighted":
-            transformer = QuantileTransformer(output_distribution="normal", n_quantiles=min(1_000, col.shape[0]))
+            random_state: int | None = (
+                self.seed
+                if self.seed is None or isinstance(self.seed, int)
+                else cast(int, self.generator.integers(0, 2**32, dtype=np.uint32))
+            )
+            transformer = QuantileTransformer(
+                output_distribution="normal", n_quantiles=min(1_000, col.shape[0]), random_state=random_state
+            )
             col_r: np.ndarray = transformer.fit_transform(col.to_numpy().reshape(-1, 1))
             random_values: np.ndarray = self.generator.normal(size=col_r.shape)
             col_r = np.sqrt(1 - self.alpha) * col_r + np.sqrt(self.alpha) * random_values

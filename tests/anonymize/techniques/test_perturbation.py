@@ -22,10 +22,10 @@ class TestPerturbationNumerical:
         assert anonymizer.generator
 
     @pytest.mark.parametrize("column_name", ["integer_column", "numerical_column"])
-    def test_out_type(self, column_name: str, request: pytest.FixtureRequest):
+    def test_out_type(self, rng: np.random.Generator, column_name: str, request: pytest.FixtureRequest):
         column: pd.Series = request.getfixturevalue(column_name)
         _type = FLOAT_TYPE if column_name.startswith("numerical") else INT_TYPE
-        anonymizer = PerturbationNumerical[_type](alpha=1)
+        anonymizer = PerturbationNumerical[_type](alpha=1, seed=rng)
         out = anonymizer.anonymize_column(column)
 
         assert out.dtype == column.dtype == _type
@@ -72,8 +72,8 @@ class TestPerturbationCategorical:
 
         assert anonymizer.generator
 
-    def test_out_type(self, categorical_column: pd.Series):
-        anonymizer = PerturbationCategorical(alpha=1)
+    def test_out_type(self, rng: np.random.Generator, categorical_column: pd.Series):
+        anonymizer = PerturbationCategorical(alpha=1, seed=rng)
         out = anonymizer.anonymize_column(categorical_column)
 
         assert out.dtype == "category"
