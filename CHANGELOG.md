@@ -6,6 +6,15 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.1.2](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.1...v1.1.2) (2025-05-14)
+
+
+### Bug Fixes
+
+* data nulling dtype ([#14](https://github.com/aindo-com/aindo-anonymize/issues/14)) ([1d61579](https://github.com/aindo-com/aindo-anonymize/commit/1d61579894298d460272eb98b2f380b5bd7aa401))
+* handle missing values correctly ([70374e2](https://github.com/aindo-com/aindo-anonymize/commit/70374e27aada43f628a0868397c82e3738ba74ac))
+* perturbation random state ([c868211](https://github.com/aindo-com/aindo-anonymize/commit/c868211efe2c7f6e6d8f9aaef8a28b5f0f4b2c9d))
+
 ## [1.1.1](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.0...v1.1.1) (2025-04-24)
 
 
