@@ -10,6 +10,7 @@ from aindo.anonymize.config import Config
 from aindo.anonymize.pipeline import AnonymizationPipeline
 from aindo.anonymize.techniques import KeyHashing, PerturbationNumerical
 from tests.anonymize.conftest import SEED
+from tests.anonymize.utils import assert_missing_values, insert_missing_values
 
 EXAMPLE_CONFIG: Config = Config.from_dict(
     {
@@ -116,3 +117,32 @@ def test_anonymize_all_dataframe():
     out = workflow.run(df)
 
     assert out.equals(df)
+
+
+def test_with_missing_values(string_column: pd.Series, integer_column: pd.Series):
+    dataframe = pd.DataFrame(
+        {"string_column": insert_missing_values(string_column), "integer_column": insert_missing_values(integer_column)}
+    )
+    workflow = AnonymizationPipeline(EXAMPLE_CONFIG)
+    out: pd.DataFrame = workflow.run(dataframe)
+
+    assert isinstance(out, pd.DataFrame)
+    assert_missing_values(out["string_column"], preserved=True)
+    assert_missing_values(out["integer_column"], preserved=True)
+
+
+def test_change_of_dtype(integer_column: pd.Series):
+    df = pd.DataFrame({"integer_column": integer_column})
+    config_data: dict[str, Any] = {
+        "steps": [
+            {
+                "columns": ["integer_column"],
+                "method": {"type": "binning", "bins": 10},
+            }
+        ]
+    }
+    workflow = AnonymizationPipeline(config=Config.from_dict(config_data))
+    out = workflow.run(df)
+
+    assert isinstance(out, pd.DataFrame)
+    assert out["integer_column"].dtype == "category"
