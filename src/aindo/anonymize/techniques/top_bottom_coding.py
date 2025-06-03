@@ -56,8 +56,12 @@ class TopBottomCodingNumerical(BaseSingleColumnTechnique):
             upper_value = self.upper_value
         else:
             assert self.q is not None
-            lower_value = col.quantile(self.q / 2) if self.lower_value is None else self.lower_value
-            upper_value = col.quantile(1 - self.q / 2) if self.upper_value is None else self.upper_value
+            lower_value = (
+                col.quantile(self.q / 2, interpolation="nearest") if self.lower_value is None else self.lower_value
+            )
+            upper_value = (
+                col.quantile(1 - self.q / 2, interpolation="nearest") if self.upper_value is None else self.upper_value
+            )
 
         return col.clip(lower=lower_value, upper=upper_value)
 

@@ -37,6 +37,14 @@ class TestTopBottomCodingNumerical:
         with pytest.raises(ValueError, match=error_message):
             TopBottomCodingNumerical(**params)
 
+    @pytest.mark.parametrize("column_name", ["integer_column"])
+    def test_out_type(self, column_name: str, request: pytest.FixtureRequest):
+        column: pd.Series = request.getfixturevalue(column_name)
+        anonymizer = TopBottomCodingNumerical(self.q)
+        out = anonymizer.anonymize_column(column)
+
+        assert out.dtype == column.dtype
+
     @pytest.mark.parametrize("column_name", ["integer_column", "numerical_column"])
     def test_replacing(self, column_name: str, request: pytest.FixtureRequest):
         column: pd.Series = request.getfixturevalue(column_name)
