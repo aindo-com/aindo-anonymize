@@ -140,7 +140,6 @@ class PerturbationCategorical(BasePerturbation):
             np.array(list(frequencies.values())) if self.sampling_mode == "weighted" else None
         )
         rand_values = self.generator.choice(categories, size=col.size, p=probabilities)
-        mask: np.ndarray = col.notna().to_numpy()
-        mask &= self.generator.random(col.size) <= self.alpha
+        mask: np.ndarray = col.notna().to_numpy() & (self.generator.random(col.size) <= self.alpha)
 
         return pd.Series(np.where(mask, rand_values, col), dtype="category")
