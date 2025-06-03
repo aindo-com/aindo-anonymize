@@ -51,14 +51,15 @@ class AnonymizationPipeline:
 
             for step in self.config.steps:
                 method: BaseSpec = step.method
-                if step.columns:
-                    anonymized: pd.DataFrame = method.anonymize(result.loc[:, step.columns])
-                    if not method.preserve_type:
-                        for col_name, dtype in anonymized.dtypes.to_dict().items():
-                            result[col_name] = result[col_name].astype(dtype)
-                    result.loc[:, step.columns] = anonymized
-
-                else:
+                if step.columns is None:
                     result = method.anonymize(result)
+                    continue
+
+                anonymized: pd.DataFrame = method.anonymize(result.loc[:, step.columns])
+                if method.preserve_type:
+                    result.loc[:, step.columns] = anonymized
+                else:
+                    for col_name in step.columns:
+                        result[col_name] = anonymized[col_name]
 
             return result

@@ -13,7 +13,7 @@ from faker import Faker
 DEFAULT_SCOPE: Literal["session"] = "session"
 SEED: Literal[12345] = 12345
 COL_SIZE: Literal[100] = 100
-INT_TYPE: type = np.int64
+INT_TYPE: pd.Int64Dtype = pd.Int64Dtype()
 FLOAT_TYPE: type = np.float64
 COLUMN_NAMES: list[str] = ["integer", "numerical", "categorical", "string", "date", "datetime", "time"]
 

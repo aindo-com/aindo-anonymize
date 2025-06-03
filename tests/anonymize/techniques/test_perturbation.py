@@ -10,7 +10,7 @@ import pytest
 from scipy import stats
 
 from aindo.anonymize.techniques.perturbation import PerturbationCategorical, PerturbationNumerical, SamplingMode
-from tests.anonymize.conftest import FLOAT_TYPE, INT_TYPE
+from tests.anonymize.conftest import FLOAT_TYPE
 from tests.anonymize.utils import (
     assert_categorical_distribution,
     assert_missing_values,
@@ -29,11 +29,11 @@ class TestPerturbationNumerical:
     @pytest.mark.parametrize("column_name", ["integer_column", "numerical_column"])
     def test_out_type(self, rng: np.random.Generator, column_name: str, request: pytest.FixtureRequest):
         column: pd.Series = request.getfixturevalue(column_name)
-        _type = FLOAT_TYPE if column_name.startswith("numerical") else INT_TYPE
+        _type = float if column_name.startswith("numerical") else int
         anonymizer = PerturbationNumerical[_type](alpha=1, seed=rng)
         out = anonymizer.anonymize_column(column)
 
-        assert out.dtype == column.dtype == _type
+        assert out.dtype == column.dtype
 
     @pytest.mark.parametrize(
         "sampling_mode",
@@ -51,7 +51,7 @@ class TestPerturbationNumerical:
         self, rng: np.random.Generator, column_name: str, request: pytest.FixtureRequest
     ):
         column: pd.Series = request.getfixturevalue(column_name)
-        _type = FLOAT_TYPE if column_name.startswith("numerical") else INT_TYPE
+        _type = float if column_name.startswith("numerical") else int
         anonymizer = PerturbationNumerical[_type](alpha=1, sampling_mode="uniform", seed=rng)
         out = anonymizer.anonymize_column(column)
 
