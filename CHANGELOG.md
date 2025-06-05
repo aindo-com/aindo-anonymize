@@ -6,6 +6,15 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.1.3](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.2...v1.1.3) (2025-06-05)
+
+
+### Bug Fixes
+
+* correct quantile computation for top/bottom-coding (numerical) ([cc3541e](https://github.com/aindo-com/aindo-anonymize/commit/cc3541eb02e7ec625303c34a3700951790d39451))
+* handle read-only array bug on perturbation ([fb39da3](https://github.com/aindo-com/aindo-anonymize/commit/fb39da3d1f1068ba2115242671ad37d152b5d444))
+* pipeline bug related to dtype casting ([dbc4ff8](https://github.com/aindo-com/aindo-anonymize/commit/dbc4ff8a51f0445932d926f98f74a499bd77fed9))
+
 ## [1.1.2](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.1...v1.1.2) (2025-05-14)
 
 
