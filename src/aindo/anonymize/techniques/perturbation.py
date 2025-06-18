@@ -46,13 +46,13 @@ class PerturbationNumerical(BasePerturbation, Generic[NumericsT]):
             If not set, the range is automatically computed as the minimum and maximum of the input data.
     """
 
-    sampling_mode: SamplingMode = "uniform"
+    sampling_mode: SamplingMode = "weighted"
     perturbation_range: tuple[NumericsT, NumericsT] | None = None
 
     def __init__(
         self,
         alpha: float,
-        sampling_mode: SamplingMode = "uniform",
+        sampling_mode: SamplingMode = "weighted",
         perturbation_range: tuple[NumericsT, NumericsT] | None = None,
         **kwargs: SeedT,
     ) -> None:
@@ -113,13 +113,13 @@ class PerturbationCategorical(BasePerturbation):
             Automatically computed if not provided.
     """
 
-    sampling_mode: SamplingMode = "uniform"
+    sampling_mode: SamplingMode = "weighted"
     frequencies: dict[str, float] | None = None
 
     def __init__(
         self,
         alpha: float,
-        sampling_mode: SamplingMode = "uniform",
+        sampling_mode: SamplingMode = "weighted",
         frequencies: dict[str, float] | None = None,
         **kwargs: SeedT,
     ) -> None:
