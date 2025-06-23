@@ -5,6 +5,7 @@
 from typing import Any
 
 import pandas as pd
+import pytest
 
 from aindo.anonymize.config import Config
 from aindo.anonymize.pipeline import AnonymizationPipeline
@@ -146,3 +147,25 @@ def test_change_of_dtype(integer_column: pd.Series):
 
     assert isinstance(out, pd.DataFrame)
     assert out["integer_column"].dtype == "category"
+
+
+@pytest.mark.parametrize(
+    "steps",
+    [
+        [
+            {"method": {"type": "data_nulling"}, "columns": ["third"]},
+            {"method": {"type": "data_nulling"}, "columns": ["first"]},
+            {"method": {"type": "data_nulling"}, "columns": ["second"]},
+        ],
+        [{"method": {"type": "identity"}, "columns": ["third", "first", "second"]}],
+    ],
+    ids=["multiple-techniques", "single-technique"],
+)
+def test_column_ordering(integer_column: pd.Series, steps: list[dict[str, Any]]):
+    df = pd.DataFrame({"first": integer_column, "second": integer_column, "third": integer_column})
+    config_data: dict[str, Any] = {"steps": steps}
+    workflow = AnonymizationPipeline(config=Config.from_dict(config_data))
+    out = workflow.run(df)
+
+    assert isinstance(out, pd.DataFrame)
+    assert df.columns.to_list() == out.columns.to_list()
