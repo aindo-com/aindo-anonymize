@@ -41,7 +41,7 @@ so setting up and running the tests should be straightforward.
 Before getting started, you'll need the following prerequisites:
 
 - git
-- any Python version between 3.10 and 3.12
+- any Python version 3.10 or higher
 - ideally, though not required, a virtual environment tool (`venv`, `uv`, etc.) should be used.
 
 !!! Tip

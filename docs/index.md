@@ -23,7 +23,7 @@ offering a collection of pseudonymization techniques such as masking, mocking, p
 pip install aindo-anonymize
 ```
 
-It officially supports Python 3.10, 3.11 and 3.12.
+It officially supports Python versions 3.10 and above.
 
 ## Quick example
 

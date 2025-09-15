@@ -20,7 +20,7 @@ jobs:
     name: Run tests for Python ${{ matrix.python-version }}
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12" ]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
       fail-fast: false
     uses: ./.github/workflows/tests.yml
     with:
