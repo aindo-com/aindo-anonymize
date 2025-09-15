@@ -69,6 +69,7 @@ line-length = 120
 
 [tool.ruff.lint]
 select = [
+  'F',      # pyflakes
   'I',      # isort
   'D',      # pydocstyle
   "TID252", # flake8-tidy-imports
