@@ -6,6 +6,20 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.1.4](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.3...v1.1.4) (2025-11-24)
+
+
+### Build System
+
+* add Python 3.14 to supported versions ([f6c2e92](https://github.com/aindo-com/aindo-anonymize/commit/f6c2e92d2da750632ffb298da2d5f24f59b24277))
+* add Python 3.13 to supported versions ([dd3f756](https://github.com/aindo-com/aindo-anonymize/commit/dd3f7568256d802a794c99618128ae9b7b88d2b8))
+* add Pyflakes lint rule to Ruff configuration ([b45d01c](https://github.com/aindo-com/aindo-anonymize/commit/b45d01c056f4a5ed3ea9b849fefab4f04b223f2e))
+
+
+### Code Refactoring
+
+* set default sampling mode for perturbation to weighted ([c3d96f1](https://github.com/aindo-com/aindo-anonymize/commit/c3d96f1dcd007070d925ce692efc0b58e9a71580))
+
 ## [1.1.3](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.2...v1.1.3) (2025-06-05)
 
 
