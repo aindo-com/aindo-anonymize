@@ -28,6 +28,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: Scientific/Engineering :: Information Analysis",
   "Typing :: Typed",
@@ -39,8 +40,9 @@ Documentation = "https://docs.anonymize.aindo.com"
 
 [project.optional-dependencies]
 test = [
-  "pytest~=8.3.3",
-  "scipy~=1.14.1",
+  "pytest~=9.0.1",
+  "scipy~=1.15.3; python_version<'3.11'",
+  "scipy~=1.16.3; python_version>='3.11'",
   "coverage",
 ]
 
