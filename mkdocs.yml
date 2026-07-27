@@ -127,7 +127,7 @@ plugins:
             signature_crossrefs: true
             filters: ["!^_"]
             modernize_annotations: true
-          import:
+          inventories:
             - url: https://docs.python.org/3/objects.inv
               domains: [py, std]           
             - url: https://pandas.pydata.org/pandas-docs/stable/objects.inv
