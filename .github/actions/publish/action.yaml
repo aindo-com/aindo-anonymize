@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Aindo SpA
+#
+# SPDX-License-Identifier: MIT
+
+name: 'Publish'
+description: 'Publish aindo-anonymize library to a PyPI compatible repository'
+
+inputs:
+  repository-url:
+    description: 'Repository url to use'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Download all the distributions
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+    - name: Publish package to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: ${{ inputs.repository-url }}
