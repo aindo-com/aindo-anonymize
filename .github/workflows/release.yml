@@ -18,8 +18,61 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
     steps:
-    - uses: googleapis/release-please-action@v4
+    - uses: googleapis/release-please-action@v5
       with:
-        token: ${{ secrets.PAT_TOKEN }}
         release-type: python
+
+  debug:
+    name: Debug
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Debug:"
+          echo "Release created: ${{ needs.release.outputs.releases_created }}"
+          echo "Tag name: ${{ needs.release.outputs.tag_name }}"
+          echo "Version: ${{ needs.release.outputs.version }}"
+
+  build:
+    name: Build distribution package
+    runs-on: ubuntu-latest
+    needs: [release]
+    if: needs.release.outputs.releases_created
+    steps:
+    - name: Checkout release ${{ needs.release.outputs.tag_name }}
+      uses: actions/checkout@v7
+      with:
+        ref: '${{ needs.release.outputs.tag_name }}'
+    - name: Build
+      uses: ./.github/actions/build-library
+
+  publish-to-testpypi:
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/aindo-anonymize
+    permissions:
+      id-token: write
+    steps:
+    - name: Publish package to TestPyPI
+      uses: ./.github/actions/publish
+      with:
+        repository-url: https://test.pypi.org/legacy/
+
+  publish-to-pypi:
+    runs-on: ubuntu-latest
+    needs: [build, publish-to-testpypi]
+    environment:
+      name: pypi
+      url: https://pypi.org/p/aindo-anonymize
+    permissions:
+      id-token: write
+    steps:
+    - name: Publish package to PyPI
+      uses: ./.github/actions/publish
