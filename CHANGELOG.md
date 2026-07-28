@@ -6,6 +6,13 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [1.1.5](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.4...v1.1.5) (2026-07-28)
+
+
+### Documentation
+
+* mkdocstrings import has been renamed to inventories ([50e8b18](https://github.com/aindo-com/aindo-anonymize/commit/50e8b185772f090b1409b8cded40f979f2185b6a))
+
 ## [1.1.4](https://github.com/aindo-com/aindo-anonymize/compare/v1.1.3...v1.1.4) (2025-11-24)
 
 
