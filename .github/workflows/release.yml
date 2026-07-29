@@ -44,5 +44,7 @@ jobs:
     needs: [release]
     if: needs.release.outputs.releases_created == 'true'
     uses: ./.github/workflows/publish.yml
+    permissions:
+      id-token: write
     with:
       repository_ref: '${{ needs.release.outputs.tag_name }}'
